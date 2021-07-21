@@ -27,6 +27,10 @@ public class Post {
     @Column(name = "body")
     private String body;
 
+    @NotBlank(message = "Please provide your Name")
+    @Column(name = "author_name")
+    private String authorName;
+
     @OneToMany(mappedBy = "post",
             cascade = CascadeType.ALL)
     private List<Comment> comments;
@@ -35,9 +39,6 @@ public class Post {
     @JoinColumn(name = "author_id")
     private User user;
 
-    @Lob
-    @Column(columnDefinition = "MEDIUMBLOB")
-    private String postImg;
 
     @CreationTimestamp
     @Column(name = "created_at")
@@ -51,11 +52,11 @@ public class Post {
     }
 
     public Post(String title, String body,
-                List<Comment> comments, User user) {
+                List<Comment> comments, User user, String authorName) {
         this.title = title;
         this.body = body;
         this.comments = comments;
         this.user = user;
-
+        this.authorName = authorName;
     }
 }

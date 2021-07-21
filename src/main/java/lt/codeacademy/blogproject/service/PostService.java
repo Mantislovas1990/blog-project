@@ -23,8 +23,8 @@ public class PostService {
         this.postRepository = postRepository;
     }
 
-    public void addNewPost(Post post) {
-        postRepository.save(post);
+    public Post addNewPost(Post post) {
+       return postRepository.save(post);
     }
 
     public List<Post> getAllPosts() {
