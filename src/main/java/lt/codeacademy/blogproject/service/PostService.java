@@ -4,6 +4,8 @@ package lt.codeacademy.blogproject.service;
 import lt.codeacademy.blogproject.entities.Post;
 import lt.codeacademy.blogproject.repositories.PostRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
@@ -21,6 +23,10 @@ public class PostService {
     @Autowired
     public PostService(PostRepository postRepository) {
         this.postRepository = postRepository;
+    }
+
+    public Page<Post> getPostsPaginated(Pageable pageable, Long id) {
+        return id != null ? postRepository.getPostById(pageable, id) : postRepository.findAll(pageable);
     }
 
     public Post addNewPost(Post post) {

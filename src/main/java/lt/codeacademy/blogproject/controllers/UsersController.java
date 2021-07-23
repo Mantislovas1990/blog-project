@@ -4,6 +4,7 @@ import lombok.extern.slf4j.Slf4j;
 import lt.codeacademy.blogproject.entities.User;
 import lt.codeacademy.blogproject.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -22,6 +23,7 @@ import java.util.List;
 @RequestMapping("/users")
 public class UsersController {
 
+
     @Autowired
     private UserService userService;
 
@@ -37,9 +39,13 @@ public class UsersController {
     }
 
     @GetMapping("/login")
-    public String login(Model model) {
-        model.addAttribute("user", new User());
-        return "user/login";
+    public String login(Model model, @AuthenticationPrincipal User user) {
+        if (user == null) {
+            model.addAttribute("user", new User());
+            return "user/login";
+        }
+
+        return "redirect:/";
     }
 
     @PostMapping(value = "/register")
@@ -53,7 +59,7 @@ public class UsersController {
             userService.addNewUser(user);
             redirectAttributes.addFlashAttribute("errors", "Failed to create person.");
             log.info("User {} has registered successfully", user);
-            request.login(user.getUserName(), user.getPassword());
+            request.login(user.getUsername(), user.getPassword());
             return "redirect:/";
         }
     }

@@ -1,64 +1,101 @@
 <!doctype html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="">
-  <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
-  <meta name="generator" content="Hugo 0.84.0">
-  <title>Signin</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
+    <meta name="generator" content="Hugo 0.84.0">
+    <title>Signin</title>
 
-  <link rel="canonical" href="https://getbootstrap.com/docs/5.0/examples/sign-in/">
 
-  <!-- Bootstrap core CSS -->
-  <link href="../../static/bootstrap.min.css" rel="stylesheet">
 
-  <!-- Custom styles for this template -->
-  <link href="../../static/login.css" rel="stylesheet">
+    <link rel="canonical" href="https://getbootstrap.com/docs/5.0/examples/sign-in/">
 
-  <style>
-    .bd-placeholder-img {
-      font-size: 1.125rem;
-      text-anchor: middle;
-      -webkit-user-select: none;
-      -moz-user-select: none;
-      user-select: none;
-    }
+    <!-- Bootstrap core CSS -->
+    <link href="../../static/bootstrap.min.css" rel="stylesheet">
 
-    @media (min-width: 768px) {
-      .bd-placeholder-img-lg {
-        font-size: 3.5rem;
-      }
-    }
-  </style>
+    <!-- Custom styles for this template -->
+    <link href="../../static/login.css" rel="stylesheet">
+
+    <link rel="canonical" href="https://getbootstrap.com/docs/5.0/examples/album/">
+    <!-- Bootstrap core CSS -->
+    <link href="../static/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+    <style>
+        .bd-placeholder-img {
+            font-size: 1.125rem;
+            text-anchor: middle;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            user-select: none;
+        }
+
+        @media (min-width: 768px) {
+            .bd-placeholder-img-lg {
+                font-size: 3.5rem;
+            }
+        }
+    </style>
 
 </head>
-<body class="text-center">
+<body class="text-center flex-column style" style="background-color: #e7e7e7;">
 
+<header class=" container navbar-expand-lg ">
+    <nav class="navbar navbar-inverse">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="#">BL0G</a>
+            </div>
+            <ul class="nav navbar-nav">
+                <li class="active"><a href="#">Home</a></li>
+                <li><a href="#">Create Post</a></li>
+                <li><a href="#">Show ALL Users</a></li>
+                <li><a href="#">Page 3</a></li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="#"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
+                <li><a href="#"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+            </ul>
+        </div>
+    </nav>
+</header>
 
 <main class="form-signin">
-  <form>
+    <form method="POST" th:action="@{/login}" th:object="${user}">
 
-    <h1 class="h3 mb-3 fw-normal">Please Login</h1>
+        <h1 class="h3 mb-3 fw-normal">Please Login</h1>
 
-    <div class="form-floating">
-      <input type="text" class="form-control" id="floatingInput" placeholder="new div">
-      <label for="floatingInput">User Name</label>
-    </div>
-    <div class="form-floating">
-      <input type="password" class="form-control" id="floatingPassword" placeholder="Password">
-      <label for="floatingPassword">Password</label>
-    </div>
+        <div class="form-floating">
+            <label for="userName">User Name</label>
+            <input type="text" class="form-control" id="userName"  name="userName" placeholder="UserName" th:field="*{username}">
+        </div>
+        <div class="form-floating">
+            <label for="password">Password</label>
+            <input type="password" class="form-control" id="password" placeholder="password"  th:field="*{password}">
+        </div>
 
-    <div class="checkbox mb-3">
-      <label>
-        <input type="checkbox" value="remember-me"> Remember me
-      </label>
-    </div>
-    <button class="w-100 btn btn-lg btn-primary" type="submit">Login</button>
-    <p class="mt-5 mb-3 text-muted">&copy; 2021 Spring MVC</p>
-  </form>
+        <div class="checkbox mb-3">
+            <label>
+                <input type="checkbox" value="remember-me"> Remember me
+            </label>
+        </div>
+        <button class="w-100 btn btn-lg btn-primary" style="background-color: #222223;" type="submit">Login</button>
+        <p class="mt-5 mb-3 text-muted">&copy; 2021 Spring MVC</p>
+    </form>
 </main>
+
+<div>
+    <footer class="text-center text-white container" style="background-color: #222223;">
+        <div class="container p-4"></div>
+        <div  style="color: #9c9c9d">
+            © 2021 Spring MVC
+        </div>
+    </footer>
+</div>
 
 </body>
 

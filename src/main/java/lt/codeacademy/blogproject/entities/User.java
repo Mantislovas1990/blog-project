@@ -1,6 +1,7 @@
 package lt.codeacademy.blogproject.entities;
 
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 import org.springframework.security.core.GrantedAuthority;
@@ -17,7 +18,7 @@ import java.util.Set;
 @Data
 @Entity
 @Table(name = "users")
-public class User implements UserDetails {
+public class User implements UserDetails{
 
     @Id
     @Column(name = "id")
@@ -26,7 +27,7 @@ public class User implements UserDetails {
 
     @NotBlank(message = "Please provide your User Name")
     @Column(name = "user_name")
-    private String userName;
+    private String username;
 
     @NotBlank(message = "Please provide your password")
     @Size(min = 4,  message = "Your password must have at least 4 characters")
@@ -38,9 +39,13 @@ public class User implements UserDetails {
     @Email
     private String email;
 
-    @NotBlank(message = "Please provide your full Name")
-    @Column(name = "full_name")
-    private String fullName;
+    @NotBlank(message = "Please provide your First Name")
+    @Column(name = "first_name")
+    private String firstName;
+
+    @NotBlank(message = "Please provide your Last Name")
+    @Column(name = "last_name")
+    private String lastName;
 
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "user_role",
@@ -60,12 +65,18 @@ public class User implements UserDetails {
     public User() {
     }
 
-    public User(String userName, String password, String email, String fullName) {
-        this.userName = userName;
+    public User(String username, String password, String email, String firstName, String lastName) {
+        this.username = username;
         this.password = password;
         this.email = email;
-        this.fullName = fullName;
+        this.firstName = firstName;
+        this.lastName = lastName;
 
+    }
+
+
+    public String getFullName() {
+        return firstName + " " + lastName;
     }
 
     @Override
@@ -75,8 +86,9 @@ public class User implements UserDetails {
 
     @Override
     public String getUsername() {
-        return fullName;
+        return username;
     }
+
 
     @Override
     public boolean isAccountNonExpired() {
@@ -98,11 +110,4 @@ public class User implements UserDetails {
         return true;
     }
 
-    public String getUserName() {
-        return userName;
-    }
-
-    public void setUserName(String userName) {
-        this.userName = userName;
-    }
 }

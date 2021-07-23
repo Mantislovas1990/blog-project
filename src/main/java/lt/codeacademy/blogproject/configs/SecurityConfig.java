@@ -23,32 +23,32 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     private final DataSource dataSource;
 
-    private final PasswordEncoder encoder;
+    private final PasswordEncoder passwordEncoder;
 
-    public SecurityConfig(UserService userService, DataSource dataSource, PasswordEncoder encoder) {
+    public SecurityConfig(UserService userService, DataSource dataSource, PasswordEncoder passwordEncoder) {
         this.userService = userService;
         this.dataSource = dataSource;
-        this.encoder = encoder;
+        this.passwordEncoder = passwordEncoder;
     }
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
                 .authorizeRequests()
-                    .antMatchers("/register").permitAll()
-                    .anyRequest().authenticated()
+                .antMatchers("/users/register").permitAll()
+                .anyRequest().authenticated()
                 .and()
                 .formLogin().permitAll()
-                    .loginPage("/login")
-                    .loginProcessingUrl("/login")
-                    .defaultSuccessUrl("/")
-                    .failureUrl("/login?error=true")
-                    .usernameParameter("username")
-                    .passwordParameter("password")
+                .loginPage("/users/login")
+                .loginProcessingUrl("/login")
+                .defaultSuccessUrl("/")
+                .failureUrl("/users/login?error=true")
+                .usernameParameter("username")
+                .passwordParameter("password")
                 .and()
                 .logout()
-                    .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
-                    .logoutSuccessUrl("/");
+                .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
+                .logoutSuccessUrl("/");
     }
 
     @Override
@@ -56,8 +56,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         web.ignoring().requestMatchers(PathRequest.toStaticResources().atCommonLocations());
     }
 
-//    @Override
-//    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-//        auth.userDetailsService(userService).passwordEncoder(encoder);
-//    }
+    @Override
+    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+        auth.userDetailsService(userService).passwordEncoder(passwordEncoder);
+    }
 }
