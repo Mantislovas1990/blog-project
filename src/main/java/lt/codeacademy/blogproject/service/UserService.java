@@ -1,5 +1,6 @@
 package lt.codeacademy.blogproject.service;
 
+import lt.codeacademy.blogproject.entities.Role;
 import lt.codeacademy.blogproject.entities.User;
 import lt.codeacademy.blogproject.exceptions.UserNotFoundException;
 import lt.codeacademy.blogproject.repositories.RoleRepository;
@@ -13,10 +14,7 @@ import org.springframework.stereotype.Service;
 
 import javax.management.relation.RoleNotFoundException;
 import javax.transaction.Transactional;
-import java.util.List;
-import java.util.Objects;
-import java.util.Optional;
-import java.util.Set;
+import java.util.*;
 
 @Service
 public class UserService implements UserDetailsService{
@@ -49,9 +47,15 @@ public class UserService implements UserDetailsService{
 
         // need to add default role
         user.setRoles(Set.of(roleRepository.getRoleByName("USER").orElseThrow(() -> new RoleNotFoundException("USER"))));
-
+//        Set<Role> roles = new HashSet<>();
+//        Role role = new Role();
+//        role.setId(1L);
+//        role.setName("USER");
+//        roles.add(role);
+//        user.setRoles(roles);
         // need to encode password
         user.setPassword(passwordEncoder.encode(user.getPassword()));
+        System.out.println();
         return userRepository.save(user);
     }
 

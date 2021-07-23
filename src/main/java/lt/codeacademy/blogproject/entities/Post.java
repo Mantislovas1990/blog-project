@@ -23,13 +23,10 @@ public class Post {
     @Column(name = "title")
     private String title;
 
-    @NotBlank(message = "Please add text to you post")
+    @NotBlank(message = "Please add text to your post")
     @Column(name = "body")
     private String body;
 
-    @NotBlank(message = "Please provide your Name")
-    @Column(name = "author_name")
-    private String authorName;
 
     @OneToMany(mappedBy = "post",
             cascade = CascadeType.ALL)
@@ -52,11 +49,11 @@ public class Post {
     }
 
     public Post(String title, String body,
-                List<Comment> comments, User user, String authorName) {
+                List<Comment> comments, User user) {
         this.title = title;
         this.body = body;
         this.comments = comments;
         this.user = user;
-        this.authorName = authorName;
+
     }
 }

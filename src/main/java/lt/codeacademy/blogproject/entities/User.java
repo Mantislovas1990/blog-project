@@ -74,7 +74,6 @@ public class User implements UserDetails{
 
     }
 
-
     public String getFullName() {
         return firstName + " " + lastName;
     }
@@ -82,11 +81,6 @@ public class User implements UserDetails{
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return roles;
-    }
-
-    @Override
-    public String getUsername() {
-        return username;
     }
 
 

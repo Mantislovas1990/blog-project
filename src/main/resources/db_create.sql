@@ -1,8 +1,8 @@
-DROP TABLE IF EXISTS comments;
-DROP TABLE IF EXISTS articles;
-DROP TABLE IF EXISTS user_role;
-DROP TABLE IF EXISTS roles;
-DROP TABLE IF EXISTS users;
+-- DROP TABLE IF EXISTS comments;
+-- DROP TABLE IF EXISTS articles;
+-- DROP TABLE IF EXISTS user_role;
+-- DROP TABLE IF EXISTS roles;
+-- DROP TABLE IF EXISTS users;
 
 
 CREATE TABLE users
@@ -12,7 +12,7 @@ CREATE TABLE users
     first_name  varchar(50)          not null,
     last_name  varchar(50)          not null,
     email      varchar(60)           NOT NULL,
-    password   varchar(20)           NOT NULL,
+    password   varchar(255)           NOT NULL,
     created_at timestamp without time zone DEFAULT CURRENT_TIMESTAMP,
     updated_at timestamp without time zone DEFAULT CURRENT_TIMESTAMP
 );
