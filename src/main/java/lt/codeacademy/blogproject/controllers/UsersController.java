@@ -49,16 +49,15 @@ public class UsersController {
 
     @PostMapping(value = "/register")
     public String registerNewUser(@Valid User user,
-                                  BindingResult bindingResult,
-                                  RedirectAttributes redirectAttributes,
-     HttpServletRequest request) throws ServletException, RoleNotFoundException {
+                                  BindingResult bindingResult
+  ) throws  RoleNotFoundException {
         if (bindingResult.hasErrors()) {
             return "user/register";
         } else {
             userService.addNewUser(user);
-            redirectAttributes.addFlashAttribute("errors", "Failed to create person.");
-            log.info("User {} has registered successfully", user);
-            request.login(user.getUsername(), user.getPassword());
+//            redirectAttributes.addFlashAttribute("errors", "Failed to create person.");
+//            log.info("User {} has registered successfully", user);
+//            request.login(user.getUsername(), user.getPassword());
             return "redirect:/";
         }
     }
