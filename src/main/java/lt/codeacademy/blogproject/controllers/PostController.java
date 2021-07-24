@@ -32,13 +32,9 @@ public class PostController {
 
 //    @GetMapping
 //    public String getCars(@PageableDefault(size = 5) Pageable pageable,
-//                          @RequestParam(required = false) Long id,
 //                          @AuthenticationPrincipal Post post,
-//                          Model model,
-//                          HttpSession session,
-//                          HttpServletRequest request,
-//                          HttpServletResponse response) {
-//        model.addAttribute("postPage", postService.getPostsPaginated(pageable, id));
+//                          Model model) {
+//        model.addAttribute("postPage", postService.getPostsPaginated(pageable));
 //        return "/index";
 //    }
 
@@ -48,24 +44,25 @@ public class PostController {
     }
 
     @GetMapping
-    public List<Post> getAllPosts() {
-        return postService.getAllPosts();
+    public String getAllPosts(Model model) {
+        model.addAttribute("postList", postService.getAllPosts() );
+        return "/index";
     }
 
 
     @GetMapping(value = "/create")
-    public String createPost(@Valid BindingResult bindingResult, Model model, RedirectAttributes attributes){
+    public String createPost(Model model){
         model.addAttribute("post", new Post());
-        attributes.addFlashAttribute("successMsg", "Your car has been successfully created!");
         return "/posts/create";
     }
 
 
     //TODO FIND HOW TO BIND CURRENT USER TO CURRENT POST
-//    @PostMapping(value = "/save")
-//    public String SaveNewPost(Post post){
-//
-//    }
+    @PostMapping(value = "/save")
+    public String saveNewPost(Post post){
+        postService.savePost(post);
+        return "redirect:/";
+    }
 
     @GetMapping(value = "/{id}/delete")
     public String deletePost(@PathVariable Long id) {

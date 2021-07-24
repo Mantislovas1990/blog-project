@@ -1,5 +1,7 @@
 <!doctype html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -49,10 +51,24 @@
                 <li><a href="#">Create Post</a></li>
                 <li><a href="#">Show ALL Users</a></li>
                 <li><a href="#">Page 3</a></li>
+                <li sec:authorize="isAuthenticated()" class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-bs-toggle="dropdown"
+                       aria-expanded="false"
+                       th:text="${#locale.toLanguageTag().toUpperCase()}"
+                    ></a>
+                    <ul class="dropdown-menu" aria-labelledby="dropdown01">
+                        <li><a class="dropdown-item" th:href="@{''(lang='lt')}"
+                               th:unless="${#locale.toString().equals('lt')}">LT</a></li>
+                        <li><a class="dropdown-item" th:href="@{''(lang='en')}"
+                               th:unless="${#locale.toString().equals('en')}">EN</a></li>
+                    </ul>
+                </li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
-                <li><a href="#"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
-                <li><a href="#"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+                <li><a th:href="@{/users/register}" th:classappend="${#request.getRequestURI().equals('/register')} ? active">
+                    <span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
+                <li><a th:href="@{/users/login}" th:classappend="${#request.getRequestURI().equals('/login')} ? active">
+                    <span class="glyphicon glyphicon-log-in"></span> Login</a></li>
             </ul>
         </div>
     </nav>

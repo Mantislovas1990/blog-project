@@ -21,7 +21,6 @@ CREATE TABLE articles
 (
     id          bigserial PRIMARY KEY not null,
     author_id   INTEGER               NOT NULL,
-    author_name varchar(100)          not null,
     title       varchar(50)           NOT NULL,
     body        TEXT                  NOT NULL,
     created_at  timestamp without time zone DEFAULT CURRENT_TIMESTAMP,

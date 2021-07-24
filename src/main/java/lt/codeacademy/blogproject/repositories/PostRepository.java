@@ -18,5 +18,5 @@ public interface PostRepository extends JpaRepository<Post, Long> {
 //    @Query(value = "select *  FROM  articles s  where s.f= :title", nativeQuery = true)
 //    Optional<Post> findPostByAuthorName(String authorName);
 
-    Page<Post> getPostById(Pageable pageable, Long id);
+//    Page<Post> getPostById(Pageable pageable);
 }

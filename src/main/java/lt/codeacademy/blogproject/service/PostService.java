@@ -25,11 +25,11 @@ public class PostService {
         this.postRepository = postRepository;
     }
 
-    public Page<Post> getPostsPaginated(Pageable pageable, Long id) {
-        return id != null ? postRepository.getPostById(pageable, id) : postRepository.findAll(pageable);
+    public Page<Post> getPostsPaginated(Pageable pageable) {
+        return postRepository.findAll(pageable);
     }
 
-    public Post addNewPost(Post post) {
+    public Post savePost(Post post) {
        return postRepository.save(post);
     }
 

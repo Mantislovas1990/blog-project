@@ -44,7 +44,6 @@ public class UsersController {
             model.addAttribute("user", new User());
             return "user/login";
         }
-
         return "redirect:/";
     }
 

@@ -1,5 +1,7 @@
 <!doctype html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -7,7 +9,6 @@
     <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
     <meta name="generator" content="Hugo 0.84.0">
     <title>Signin</title>
-
 
 
     <link rel="canonical" href="https://getbootstrap.com/docs/5.0/examples/sign-in/">
@@ -55,10 +56,24 @@
                 <li><a href="#">Create Post</a></li>
                 <li><a href="#">Show ALL Users</a></li>
                 <li><a href="#">Page 3</a></li>
+                <li sec:authorize="isAuthenticated()" class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-bs-toggle="dropdown"
+                       aria-expanded="false"
+                       th:text="${#locale.toLanguageTag().toUpperCase()}"
+                    ></a>
+                    <ul class="dropdown-menu" aria-labelledby="dropdown01">
+                        <li><a class="dropdown-item" th:href="@{''(lang='lt')}"
+                               th:unless="${#locale.toString().equals('lt')}">LT</a></li>
+                        <li><a class="dropdown-item" th:href="@{''(lang='en')}"
+                               th:unless="${#locale.toString().equals('en')}">EN</a></li>
+                    </ul>
+                </li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
-                <li><a href="#"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
-                <li><a href="#"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+                <li><a th:href="@{/users/register}" th:classappend="${#request.getRequestURI().equals('/register')} ? active">
+                    <span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
+                <li><a th:href="@{/users/login}" th:classappend="${#request.getRequestURI().equals('/login')} ? active">
+                    <span class="glyphicon glyphicon-log-in"></span> Login</a></li>
             </ul>
         </div>
     </nav>
@@ -70,12 +85,13 @@
         <h1 class="h3 mb-3 fw-normal">Please Login</h1>
 
         <div class="form-floating">
-            <label for="userName">User Name</label>
-            <input type="text" class="form-control" id="userName"  name="userName" placeholder="UserName" th:field="*{username}">
+            <label for="username">User Name</label>
+            <input type="text" class="form-control" id="username" name="username" placeholder="UserName"
+                   th:field="*{username}">
         </div>
         <div class="form-floating">
             <label for="password">Password</label>
-            <input type="password" class="form-control" id="password" placeholder="password"  th:field="*{password}">
+            <input type="password" class="form-control" id="password" placeholder="password" th:field="*{password}">
         </div>
 
         <div class="checkbox mb-3">
@@ -91,7 +107,7 @@
 <div>
     <footer class="text-center text-white container" style="background-color: #222223;">
         <div class="container p-4"></div>
-        <div  style="color: #9c9c9d">
+        <div style="color: #9c9c9d">
             © 2021 Spring MVC
         </div>
     </footer>
