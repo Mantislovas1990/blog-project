@@ -65,7 +65,7 @@
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
                     <li
-                            sec:authorize="isAuthenticated()">Welcome <span sec:authentication="principal.getUsername()"
+                            sec:authorize="isAuthenticated()">Welcome <span sec:authentication="principal.username"
                                                                             style="background-color: #c8c8ce;"> </span>
                     </li>
                     <li><a th:href="@{/users/register}"
