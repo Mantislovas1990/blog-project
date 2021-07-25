@@ -17,7 +17,7 @@ public interface UserRepository extends JpaRepository<User, Long > {
     Optional<User> getUserByPassword(String password);
 
 //    @Query(value = "select * FROM  users  where user_name= :userName", nativeQuery = true)
-    Optional<User> getUserByUsername(String userName);
+ User getUserByUsername(String userName);
 
 //    Optional<User> getUserByUsername(String username);
 }

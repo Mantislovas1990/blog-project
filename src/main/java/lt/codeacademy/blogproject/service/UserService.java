@@ -17,7 +17,7 @@ import javax.transaction.Transactional;
 import java.util.*;
 
 @Service
-public class UserService implements UserDetailsService{
+public class UserService implements UserDetailsService {
 
 
     private final UserRepository userRepository;
@@ -86,10 +86,10 @@ public class UserService implements UserDetailsService{
             }
             user.setEmail(email);
         }
-            if (password != null && password.length() > 0 && !Objects.equals(user.getPassword(), password)) {
-                user.setPassword(password);
-            }
+        if (password != null && password.length() > 0 && !Objects.equals(user.getPassword(), password)) {
+            user.setPassword(password);
         }
+    }
 
 //    private Optional<User> getUserById(Long id) {
 //        return userRepository.findById(id);
@@ -97,8 +97,8 @@ public class UserService implements UserDetailsService{
 
     @Override
     public UserDetails loadUserByUsername(String userName) throws UsernameNotFoundException {
-        return userRepository.getUserByUsername(userName).orElseThrow(() -> new UserNotFoundException(userName));
+        return userRepository.getUserByUsername(userName);
     }
 
-    }
+}
 

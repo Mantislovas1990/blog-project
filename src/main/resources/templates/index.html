@@ -8,7 +8,7 @@
     <meta name="description" content="">
     <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
     <meta name="generator" content="Hugo 0.84.0">
-    <title>Main</title>
+    <title>Home Page</title>
 
     <link rel="canonical" href="https://getbootstrap.com/docs/5.0/examples/album/">
     <!-- Bootstrap core CSS -->
@@ -44,7 +44,7 @@
                     <a class="navbar-brand" href="/">BL0G</a>
                 </div>
                 <ul class="nav navbar-nav">
-                    <li><a href="#">Create Post</a></li>
+                    <li><a th:href="@{/posts/create}">Create Post</a></li>
                     <li><a href="#">Show ALL Comments</a></li>
                     <li><a href="#">Show ALL Users</a></li>
                     <li sec:authorize="isAuthenticated()" class="nav-item dropdown">

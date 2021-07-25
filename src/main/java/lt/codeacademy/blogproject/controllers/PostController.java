@@ -6,7 +6,9 @@ import lt.codeacademy.blogproject.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -54,17 +56,29 @@ public class PostController {
         return "redirect:/index";
     }
 
+    @GetMapping(value = "/posts/edit")
+    public String createPost(Model model){
+        model.addAttribute("post", new Post());
+        return "/posts/edit";
+    }
 
-    @GetMapping(value = "/create")
+
+    @PostMapping(value = "/posts/edit")
+    public String saveNewPost(@Valid Post post){
+        postService.savePost(post);
+        return "redirect:/";
+    }
+
+
+    @GetMapping(value = "/posts/create")
     public String createPost(Model model){
         model.addAttribute("post", new Post());
         return "/posts/create";
     }
 
 
-    //TODO FIND HOW TO BIND CURRENT USER TO CURRENT POST
-    @PostMapping(value = "/save")
-    public String saveNewPost(Post post){
+    @PostMapping(value = "/posts/create")
+    public String saveNewPost(@Valid Post post){
         postService.savePost(post);
         return "redirect:/";
     }
