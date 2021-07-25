@@ -56,18 +56,18 @@ public class PostController {
         return "redirect:/index";
     }
 
-    @GetMapping(value = "/posts/edit")
-    public String createPost(Model model){
-        model.addAttribute("post", new Post());
-        return "/posts/edit";
-    }
-
-
-    @PostMapping(value = "/posts/edit")
-    public String saveNewPost(@Valid Post post){
-        postService.savePost(post);
-        return "redirect:/";
-    }
+//    @GetMapping(value = "/posts/edit")
+//    public String editPost(Model model){
+//        model.addAttribute("post", new Post());
+//        return "/posts/edit";
+//    }
+//
+//
+//    @PostMapping(value = "/posts/edit")
+//    public String saveEditedPost(@Valid Post post){
+//        postService.savePost(post);
+//        return "redirect:/";
+//    }
 
 
     @GetMapping(value = "/posts/create")
@@ -83,22 +83,28 @@ public class PostController {
         return "redirect:/";
     }
 
-    @GetMapping(value = "/{id}/delete")
-    public String deletePost(@PathVariable Long id) {
-        postService.deletePostById(id);
-        return "/posts";
+    @GetMapping("/posts/{id}/view")
+    public String getPost(@PathVariable Long id, Model model) {
+        model.addAttribute("post", postService.getPostById(id));
+        return "posts/view";
     }
 
-    @PutMapping(value = "/{id}/edit")
-    public String updatePost(
-            @PathVariable Long id,
-            @RequestParam(required = false) String title,
-            @RequestParam(required = false) String body
-    ) {
-        postService.updatePost(id, title, body);
-        return "redirect:/";
-    }
+//    @GetMapping(value = "/posts/{id}/delete")
+//    public String deletePost(@PathVariable Long id) {
+//        postService.deletePostById(id);
+//        return "/posts";
+//    }
+//
+//    @PutMapping(value = "/{id}/edit")
+//    public String updatePost(
+//            @PathVariable Long id,
+//            @RequestParam(required = false) String title,
+//            @RequestParam(required = false) String body
+//    ) {
+//        postService.updatePost(id, title, body);
+//        return "redirect:/";
 
+//    }
 
 
 }
