@@ -21,7 +21,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Controller
-@RequestMapping(path = "/posts")
+@RequestMapping
 public class PostController {
 
     @Autowired
@@ -43,10 +43,15 @@ public class PostController {
         return postService.getPostByTitle(title);
     }
 
-    @GetMapping
+    @GetMapping(value = "/index")
     public String getAllPosts(Model model) {
         model.addAttribute("postList", postService.getAllPosts() );
         return "/index";
+    }
+
+    @GetMapping
+    public String home(HttpServletRequest request, HttpSession session) {
+        return "redirect:/index";
     }
 
 
@@ -79,5 +84,7 @@ public class PostController {
         postService.updatePost(id, title, body);
         return "redirect:/";
     }
+
+
 
 }

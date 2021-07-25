@@ -63,14 +63,7 @@ VALUES ('USER'),
 --        (2, 1);
 
 
--- INSERT INTO users(id, user_name, full_name, email, password)
--- values (1, 'Firstuser01', 'First User', 'firstuser@first.com', 'first'),
---        (2, 'Seconduser02', 'Second User', 'seconduser@second.com', 'second'),
---        (3, 'Thirduser03', 'Third User', 'thirduser@third.com', 'third'),
---        (4, 'fourthuser04', 'Fourth User', 'fourthuser@fourth.com', 'fourth'),
---        (5, 'fifthuser05', 'Fifth User', 'fifthuser@fifth.com', 'fifth');
---
--- INSERT INTO articles(id, author_id, author_name, title, body)
+-- INSERT INTO articles(id, author_id, title, body)
 -- VALUES (1, 1, 'fist author', 'first tittle',
 --         'Why Is Customer Service Still So Lousy (Financial Services Web Design Edition)?'),
 --        (2, 2, 'second author', 'second tittle',
