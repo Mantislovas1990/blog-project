@@ -68,11 +68,9 @@
 
                 <ul class="nav navbar-nav navbar-right">
 
-                    <li><a th:href="@{/users/register}"
-                           th:classappend="${#request.getRequestURI().equals('/register')} ? active">
+                    <li><a th:href="@{/users/register}">
                         <span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
-                    <li><a th:href="@{/users/login}"
-                           th:classappend="${#request.getRequestURI().equals('/login')} ? active">
+                    <li><a th:href="@{/users/login}">
                         <span class="glyphicon glyphicon-log-in"></span> Login</a></li>
                 </ul>
             </div>
@@ -80,25 +78,24 @@
     </header>
 </div>
 <main>
-    <div class="album py-5 bg-light">
-        <div class="container">
+    <div class="container">
+        <div>
             <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3" th:each="post: ${postList}">
                 <div class="col">
                     <div class="card shadow-sm">
                         <div class="card-body">
-                            <small class="text-muted" th:text="${post.getUser().getFirstName()}">Author Name</small>
+                            <p><strong>Author:</strong> <small class="text-muted"  th:text="${post.getUser().getFirstName().toUpperCase()}"></small></p>
                             <div>
-                                <h3 th:text="${post.getTitle()}">Title</h3>
+                                <p><strong>Title:</strong> <span  th:text="${post.getTitle().toUpperCase()}"></span></p>
                             </div>
-                            <p class="card-text" th:text="${post.getBody()}">This is a wider card with supporting text
-                                below as a natural lead-in to
-                                additional content. This content is a little bit longer.</p>
+                            <p><strong>BODY: </strong><br><span th:text="${post.getBody()}"></span></p>
                             <div class="d-flex justify-content-between align-items-center">
                                 <div class="btn-group">
-                                    <button type="button" th:onclick="'location.href = \'/posts/' + ${post.id} + '/view\';'" class="btn btn-sm btn-outline-secondary">View</button>
+                                    <button type="button" th:onclick="'location.href = \'/posts/' + ${post.id} + '/view\';'"
+                                            class="btn btn-md btn btn-secondary btn-outline-dark">View</button>
                                 </div>
-                                <small class="text-muted">Uploaded At</small>
-                                <small class="text-muted">Updated At</small>
+                                <p> <strong>Posted At: </strong> <span th:text="${post.getCreatedAt().dayOfWeek.name()} +
+                                '' +${post.getCreatedAt().getHour()} + ':' +${post.getCreatedAt().minute}"></span></p>
                             </div>
                         </div>
                     </div>
