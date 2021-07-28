@@ -6,7 +6,6 @@ import lt.codeacademy.blogproject.service.CommentService;
 import lt.codeacademy.blogproject.service.PostService;
 import lt.codeacademy.blogproject.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.rest.webmvc.ResourceNotFoundException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -22,11 +21,15 @@ public class PostController {
     @Autowired
     private PostService postService;
 
-    @Autowired
+
     private CommentService commentService;
 
     @Autowired
     private UserService userService;
+
+    public PostController(CommentService commentService) {
+        this.commentService = commentService;
+    }
 
 
     @GetMapping
@@ -40,19 +43,11 @@ public class PostController {
         return "/index";
     }
 
-//    @GetMapping(value = "/posts/view")
-//    public String getAllComments(Model model) {
-
-//        return "posts/view";
-//    }
-
-
     @GetMapping(value = "/posts/create")
     public String createPost(Model model) {
         model.addAttribute("post", new Post());
         return "/posts/create";
     }
-
 
     @PostMapping(value = "/posts/create")
     public String saveNewPost(@Valid Post post) {
@@ -64,7 +59,7 @@ public class PostController {
     public String getPost(@PathVariable("id") Long id, Model model) {
         model.addAttribute("post", postService.getPostById(id));
         model.addAttribute("createComment", new Comment());
-        model.addAttribute("commentList", commentService.getAllComments());
+        model.addAttribute("commentList", commentService.getCommentsByPostId(id));
         return "posts/view";
     }
 
