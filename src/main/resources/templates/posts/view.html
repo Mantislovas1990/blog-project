@@ -105,17 +105,20 @@
                             </div>
                             <p class="card-text" th:text="${post.getBody()}"></p>
 
-<!--                            <strong>ALL COMMENTS ARE HERE</strong>-->
-<!--                            <div class="col" th:each="comment: ${commentList} ">-->
+                            <strong>ALL COMMENTS ARE HERE</strong>
+                            <div class="col" th:each="comment: ${commentList} ">
 
-<!--                                <div class="card shadow-sm">-->
-<!--                                    <div class="card-body">-->
-<!--                                        <p><strong>COMMENT BODY: </strong>-->
-<!--                                            <span th:text="${comment.getCommentBody()}"></span>-->
-<!--                                        </p>-->
-<!--                                    </div>-->
-<!--                                </div>-->
-<!--                            </div>-->
+                                <div class="card shadow-sm">
+                                    <div class="card-body">
+                                        <p><strong>COMMENT AUTHOR: </strong>
+                                            <span th:text="${comment.getUser().getUsername()}"></span>
+                                        </p>
+                                        <p><strong>COMMENT BODY: </strong>
+                                            <span th:text="${comment.getCommentBody()}"></span>
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
                             <section>
                                 <form method="POST" th:action="@{/posts/{id}/view(id= ${post.id})}" th:object="${createComment}">
                                     <h2>ADD YOUR COMMENT</h2>

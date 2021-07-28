@@ -34,14 +34,6 @@ public class UserService implements UserDetailsService {
     }
 
     public User addNewUser(User user) throws RoleNotFoundException {
-//        Optional<User> userEmail = userRepository.getUserByEmail(user.getEmail());
-//        Optional<User> userName = userRepository.getUserByUsername(user.getUsername());
-//        if (userEmail.isPresent()) {
-//            throw new IllegalStateException("Email is taken");
-//        }
-//        if (userName.isPresent()) {
-//            throw new IllegalStateException("User Name is taken");
-//        }
 
         // need to add default role
         user.setRoles(Set.of(roleRepository.getRoleByName("USER").orElseThrow(() -> new RoleNotFoundException("USER"))));

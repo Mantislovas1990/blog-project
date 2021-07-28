@@ -42,7 +42,7 @@ public class PostController {
 
 //    @GetMapping(value = "/posts/view")
 //    public String getAllComments(Model model) {
-//        model.addAttribute("commentList", commentService.getAllComments());
+
 //        return "posts/view";
 //    }
 
@@ -53,11 +53,6 @@ public class PostController {
         return "/posts/create";
     }
 
-//    @GetMapping(value = "/posts/view")
-//    public String createComment(Model model) {
-//        model.addAttribute("createComment", new Comment());
-//        return "/posts/view";
-//    }
 
     @PostMapping(value = "/posts/create")
     public String saveNewPost(@Valid Post post) {
@@ -69,15 +64,15 @@ public class PostController {
     public String getPost(@PathVariable("id") Long id, Model model) {
         model.addAttribute("post", postService.getPostById(id));
         model.addAttribute("createComment", new Comment());
+        model.addAttribute("commentList", commentService.getAllComments());
         return "posts/view";
     }
 
     @PostMapping("/posts/{id}/view")
-    public String saveComment(@PathVariable (value = "id") Long id, @Valid Comment comment) {
-        commentService.saveComment(comment,id);
+    public String saveComment(@PathVariable(value = "id") Long id, @Valid Comment comment) {
+        commentService.saveComment(comment, id);
         return "redirect:/";
     }
-
 
 
 //    @GetMapping(value = "/posts/{id}/delete")
