@@ -79,18 +79,18 @@
     </header>
 </div>
 <main>
-<!--    <div th:object="${post}" class="row ">-->
-<!--        <div class="col-md-3 col-sm-6">-->
-<!--            <div class="form-group">-->
-<!--                <label for="title" style="font-size: 30px">Title</label>-->
-<!--                <input type="text" id="title" name="title" class="form-control-plaintext border border-dark" th:field="*{title}">-->
-<!--            </div>-->
-<!--            <div class="form-group ">-->
-<!--                <label for="body" style="font-size: 30px"   >Body</label>-->
-<!--                <input type="text" id="body" name="body" class="form-control-plaintext border border-dark" th:field="*{body}">-->
-<!--            </div>-->
-<!--        </div>-->
-<!--    </div>-->
+    <!--    <div th:object="${post}" class="row ">-->
+    <!--        <div class="col-md-3 col-sm-6">-->
+    <!--            <div class="form-group">-->
+    <!--                <label for="title" style="font-size: 30px">Title</label>-->
+    <!--                <input type="text" id="title" name="title" class="form-control-plaintext border border-dark" th:field="*{title}">-->
+    <!--            </div>-->
+    <!--            <div class="form-group ">-->
+    <!--                <label for="body" style="font-size: 30px"   >Body</label>-->
+    <!--                <input type="text" id="body" name="body" class="form-control-plaintext border border-dark" th:field="*{body}">-->
+    <!--            </div>-->
+    <!--        </div>-->
+    <!--    </div>-->
 
     <div class="album py-5 bg-light" th:object="${post}">
         <div class="container">
@@ -98,20 +98,40 @@
                 <div class="col">
                     <div class="card shadow-sm">
                         <div class="card-body">
-                            <p>Author: <small class="text-muted"  th:text="${post.getUser().getFirstName().toUpperCase()}"></small></p>
-<!--                            <small class="text-muted"  th:text="${post.getUser().getFirstName()}"></small>-->
+                            <p>Author: <small class="text-muted"
+                                              th:text="${post.getUser().getFirstName().toUpperCase()}"></small></p>
                             <div>
                                 <h3 th:text="${post.getTitle()}">Title</h3>
                             </div>
-                            <p class="card-text" th:text="${post.getBody()}">This is a wider card with supporting text
-                                below as a natural lead-in to
-                                additional content. This content is a little bit longer.</p>
-                            <div class="d-flex justify-content-between align-items-center">
-                                <div class="btn-group">
-                                    <button type="button" th:onclick="'location.href = \'/posts/' + ${post.id} + '/view\';'"
-                                            class="btn btn-sm btn-outline-secondary">ADD COMMENT</button>
-                                </div>
-                            </div>
+                            <p class="card-text" th:text="${post.getBody()}"></p>
+
+<!--                            <strong>ALL COMMENTS ARE HERE</strong>-->
+<!--                            <div class="col" th:each="comment: ${commentList} ">-->
+
+<!--                                <div class="card shadow-sm">-->
+<!--                                    <div class="card-body">-->
+<!--                                        <p><strong>COMMENT BODY: </strong>-->
+<!--                                            <span th:text="${comment.getCommentBody()}"></span>-->
+<!--                                        </p>-->
+<!--                                    </div>-->
+<!--                                </div>-->
+<!--                            </div>-->
+                            <section>
+                                <form method="POST" th:action="@{/posts/{id}/view(id= ${post.id})}" th:object="${createComment}">
+                                    <h2>ADD YOUR COMMENT</h2>
+                                    <label for="body">Text:</label>
+                                    <textarea name="text" id="body" cols="30" rows="5"
+                                              th:field="*{commentBody}"></textarea>
+                                    <br>
+
+                                    <button>ADD COMMENT</button>
+                                </form>
+                            </section>
+<!--                            <div class="d-flex justify-content-between align-items-center">-->
+<!--                                <div class="btn-group">-->
+<!--                                    <a th:href="@{/comments/create}">ADD COMMENT</a>-->
+<!--                                </div>-->
+<!--                            </div>-->
                         </div>
                     </div>
                 </div>

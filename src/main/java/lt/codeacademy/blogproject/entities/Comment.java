@@ -21,12 +21,15 @@ public class Comment {
 
     @NotBlank(message = "Please add comment")
     @Column(name = "comment")
-    private String comment;
+    private String commentBody;
 
     @ManyToOne
     @JoinColumn(name = "article_id")
     private Post post;
 
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private User user;
 
     @CreationTimestamp
     @Column(name = "created_at")
@@ -39,8 +42,7 @@ public class Comment {
     public Comment() {
     }
 
-    public Comment(String comment, Post post) {
-        this.comment = comment;
-        this.post = post;
+    public Comment(String commentBody) {
+        this.commentBody= commentBody;
     }
 }
