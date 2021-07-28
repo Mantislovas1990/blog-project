@@ -42,37 +42,6 @@ public class UserService implements UserDetailsService {
     }
 
 
-//    public void deleteUser(Long userId) {
-//        boolean exists = userRepository.existsById(userId);
-//        if (!exists) {
-//            throw new IllegalStateException(
-//                    "User with id " + userId + " does not exist");
-//        }
-//        userRepository.deleteById(userId);
-//    }
-//
-//    @Transactional
-//    public void updateUser(Long id, String userName, String email, String password) {
-//        User user = userRepository.findById(id)
-//                .orElseThrow(() -> new IllegalStateException(
-//                        "user with id " + id + " does not exists"));
-//
-//        if (userName != null && userName.length() > 0 && !Objects.equals(user.getUsername(), userName)) {
-//            user.setUsername(userName);
-//        }
-//
-//        if (email != null && email.length() > 0 && !Objects.equals(user.getEmail(), email)) {
-//            Optional<User> userEmail = userRepository.getUserByEmail(email);
-//            if (userEmail.isPresent()) {
-//                throw new IllegalStateException("email taken");
-//            }
-//            user.setEmail(email);
-//        }
-//        if (password != null && password.length() > 0 && !Objects.equals(user.getPassword(), password)) {
-//            user.setPassword(password);
-//        }
-//    }
-
     public User findUserById(Long id){
         return userRepository.getById(id);
     }

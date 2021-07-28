@@ -50,28 +50,4 @@ public class PostService {
     public Post getPostById(Long id) {
         return postRepository.getById(id);
     }
-//
-//    public void deletePostById(Long postId) {
-//        boolean exists = postRepository.existsById(postId);
-//        if (!exists) {
-//            throw new IllegalStateException(
-//                    "Post with id " + postId + " does not exist");
-//        }
-//        postRepository.deleteById(postId);
-//    }
-//
-//    @Transactional
-//    public void updatePost(Long id, String title, String body) {
-//        Post post = postRepository.findById(id)
-//                .orElseThrow(() -> new IllegalStateException(
-//                        "Post with id " + id + " does not exists"));
-//
-//        if (title != null && title.length() > 0 && !Objects.equals(post.getTitle(), title)) {
-//            post.setTitle(title);
-//        }
-//
-//        if (body != null && body.length() > 0 && !Objects.equals(post.getBody(), body)) {
-//            post.setBody(body);
-//        }
-//    }
 }

@@ -105,9 +105,6 @@
                             </div>
                             <p class="card-text" th:text="${post.getBody()}"></p>
 
-
-<!--                            //TODO: MAKE COMMENTS POST ID RELATED-->
-
                             <strong>ALL COMMENTS ARE HERE</strong>
                             <div class="col" th:each="comment: ${commentList} ">
 
@@ -123,7 +120,7 @@
                                 </div>
                             </div>
                             <section>
-                                <form method="POST" th:action="@{/posts/{id}/view(id= ${post.id})}" th:object="${createComment}">
+                                <form method="POST" th:action="@{/posts/{id}/comments/create(id= ${post.id})}" th:object="${createComment}">
                                     <h2>ADD YOUR COMMENT</h2>
                                     <label for="body">Text:</label>
                                     <textarea name="text" id="body" cols="30" rows="5"

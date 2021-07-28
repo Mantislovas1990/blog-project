@@ -2,6 +2,7 @@ package lt.codeacademy.blogproject.service;
 
 import lt.codeacademy.blogproject.entities.Comment;
 import lt.codeacademy.blogproject.entities.Post;
+import lt.codeacademy.blogproject.entities.User;
 import lt.codeacademy.blogproject.repositories.CommentRepository;
 import lt.codeacademy.blogproject.repositories.PostRepository;
 import lt.codeacademy.blogproject.repositories.UserRepository;
@@ -10,9 +11,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class CommentService {
@@ -29,10 +28,9 @@ public class CommentService {
         this.postRepository = postRepository;
     }
 
-    public Comment saveComment(Comment  comment, Long id) {
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        comment.setUser(userRepository.getUserByUsername(authentication.getName()));
-        comment.setPost(postRepository.getById(id));
+    public Comment saveComment(Comment  comment, Post post, User user) {
+        comment.setUser(user);
+        comment.setPost(post);
         return commentRepository.save(comment);
     }
 
@@ -49,24 +47,4 @@ public class CommentService {
         return commentRepository.getById(id);
     }
 
-//    public void deleteCommentById(Long commentId) {
-//        boolean exists = commentRepository.existsById(commentId);
-//        if (!exists) {
-//            throw new IllegalStateException(
-//                    "Comment with id " + commentId + " does not exist");
-//        }
-//        commentRepository.deleteById(commentId);
-//    }
-//
-//
-//    @Transactional
-//    public void updateComment(Long id, String comment) {
-//        Comment commentId = commentRepository.findById(id)
-//                .orElseThrow(() -> new IllegalStateException(
-//                        "Comment with id " + id + " does not exists"));
-//
-//        if (comment != null && comment.length() > 0 && !Objects.equals(commentId.getComment(), comment)) {
-//            commentId.setComment(comment);
-//        }
-//    }
 }
