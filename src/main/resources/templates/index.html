@@ -118,15 +118,17 @@
                                                 class="btn  btn btn-secondary btn-outline-dark m-2 ">delete post
                                         </button>
                                         <button type="button"
-                                                th:onclick="'location.href = \'/posts/' + ${post.id} + '/view\';'"
+                                                th:onclick="'location.href = \'/posts/' + ${post.id} + '/edit\';'"
                                                 class="btn  btn btn-secondary btn-outline-dark m-2">edit post
                                         </button>
                                     </div>
-                                    <p><strong>Posted At: </strong>
-                                        <span th:text="${post.getCreatedAt().dayOfWeek.name()} +
-                                ' ' +${post.getCreatedAt().getHour()} +
-                                 ':' +${post.getCreatedAt().getMinute()} +
-                                 ':'+ ${post.getCreatedAt().getSecond()}"></span></p>
+
+<!--                                    //TODO CHECK WHY THERE IS PROBLEM WITH DATE AFTER UPDATE-->
+<!--                                    <p><strong>Posted At: </strong>-->
+<!--                                        <span th:text="${post.getCreatedAt().dayOfWeek.name()} +-->
+<!--                                ' ' +${post.getCreatedAt().getHour()} +-->
+<!--                                 ':' +${post.getCreatedAt().getMinute()} +-->
+<!--                                 ':'+ ${post.getCreatedAt().getSecond()}"></span></p>-->
                                 </div>
                             </div>
                         </div>

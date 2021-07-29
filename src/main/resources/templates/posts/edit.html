@@ -12,16 +12,15 @@
     <title>Edit</title>
 </head>
 <body>
-
 <section>
-    <form method="POST" th:action="@{/posts/edit}" th:object="${post}">
+    <form method="POST" th:action="@{/posts/{id}/edit(id = ${editPost.id})}" th:object="${editPost}">
         <label>Title:</label>
         <input type="text" name="title" class="title" th:field="*{title}">
         <label>Text:</label>
         <textarea name="text" cols="60" rows="25" th:field="*{body}"></textarea>
+        <button type="submit">SAVE CHANGES</button>
     </form>
 
-    <button class="postArticleButton" href="">Post Article</button>
 </section>
 
 </body>

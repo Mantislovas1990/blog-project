@@ -35,7 +35,6 @@ public class PostController {
         this.commentService = commentService;
     }
 
-
     @GetMapping
     public String home(HttpServletRequest request, HttpSession session) {
         return "redirect:/index";
@@ -77,17 +76,18 @@ public class PostController {
         return "redirect:/";
     }
 
+    @PreAuthorize("hasRole('ADMIN') or principal.id == #post.user.id")
+    @GetMapping("/posts/{id}/edit")
+    public String editPost(@PathVariable("id") Post post,
+                           @PathVariable Long id, Model model) {
+        model.addAttribute("editPost", postService.getPostById(id));
+        return "posts/edit";
+    }
 
-//
-//    @PutMapping(value = "/{id}/edit")
-//    public String updatePost(
-//            @PathVariable Long id,
-//            @RequestParam(required = false) String title,
-//            @RequestParam(required = false) String body
-//    ) {
-//        postService.updatePost(id, title, body);
-//        return "redirect:/";
-
-//    }
-
+    @PreAuthorize("hasRole('ADMIN') or principal.id == #post.user.id")
+    @PostMapping("posts/{id}/edit")
+    public String editPost(Post post) {
+            postService.savePost(post);
+        return "redirect:/";
+    }
 }

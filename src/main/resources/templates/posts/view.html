@@ -97,13 +97,6 @@
                             <p><strong>BODY: </strong>
                                 <br><span th:text="${post.getBody()}"></span>
                             </p>
-
-                            <!--                            <div class="d-flex justify-content-between align-items-center">-->
-                            <!--                                <div class="btn-group">-->
-                            <!--                                    <a th:href="@{/comments/create}">ADD COMMENT</a>-->
-                            <!--                                </div>-->
-                            <!--                            </div>-->
-                        </div>
                     </div>
                 </div>
             </div>
@@ -139,7 +132,6 @@
                             <textarea name="text" id="body" cols="30" rows="5"
                                       th:field="*{commentBody}"></textarea>
                             <br>
-
                             <button>SAVE COMMENT</button>
                         </form>
                     </section>
