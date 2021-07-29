@@ -1,6 +1,7 @@
 package lt.codeacademy.blogproject.service;
 
 
+import lt.codeacademy.blogproject.entities.Comment;
 import lt.codeacademy.blogproject.entities.Post;
 import lt.codeacademy.blogproject.repositories.PostRepository;
 import lt.codeacademy.blogproject.repositories.UserRepository;
@@ -49,5 +50,9 @@ public class PostService {
 
     public Post getPostById(Long id) {
         return postRepository.getById(id);
+    }
+
+    public void deletePost(Post post){
+        postRepository.delete(post);
     }
 }

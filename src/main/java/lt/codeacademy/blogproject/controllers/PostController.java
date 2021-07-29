@@ -6,6 +6,7 @@ import lt.codeacademy.blogproject.service.CommentService;
 import lt.codeacademy.blogproject.service.PostService;
 import lt.codeacademy.blogproject.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -67,15 +68,16 @@ public class PostController {
     }
 
 
+    @PreAuthorize("hasRole('ADMIN') or principal.id == #post.user.id")
+    @GetMapping("/posts/{id}/delete")
+    public String deletePost(
+            @PathVariable("id") Post post
+    ) {
+        postService.deletePost(post);
+        return "redirect:/";
+    }
 
 
-
-
-//    @GetMapping(value = "/posts/{id}/delete")
-//    public String deletePost(@PathVariable Long id) {
-//        postService.deletePostById(id);
-//        return "/posts";
-//    }
 //
 //    @PutMapping(value = "/{id}/edit")
 //    public String updatePost(
@@ -87,6 +89,5 @@ public class PostController {
 //        return "redirect:/";
 
 //    }
-
 
 }

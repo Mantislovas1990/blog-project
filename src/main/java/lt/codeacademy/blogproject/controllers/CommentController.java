@@ -32,14 +32,14 @@ public class CommentController {
         return "redirect:/posts/" + post.getId() + "/view";
     }
 
-//    @PreAuthorize("(hasRole('ADMIN') or principal.id == #comment.user.id) and #comment.post.id == #post.id")
-//    @GetMapping("/posts/{postId}/comments/{id}/delete")
-//    public String deleteComment(
-//            @PathVariable("postId") Post post,
-//            @PathVariable("id") Comment comment
-//    ) {
-//        commentService.delete(comment, post);
-//        return "redirect:/";
-//    }
+    @PreAuthorize("(hasRole('ADMIN') or principal.id == #comment.user.id) and #comment.post.id == #post.id")
+    @GetMapping("/posts/{postId}/comments/{id}/delete")
+    public String deleteComment(
+            @PathVariable("postId") Post post,
+            @PathVariable("id") Comment comment
+    ) {
+        commentService.deleteComment(comment);
+        return "redirect:/posts/" + post.getId() + "/view";
+    }
 
 }

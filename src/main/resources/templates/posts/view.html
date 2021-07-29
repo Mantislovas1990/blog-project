@@ -36,7 +36,7 @@
         }
     </style>
 </head>
-<body>
+<body >
 <div>
     <header class=" container navbar-expand-lg">
         <nav class="navbar navbar-inverse">
@@ -79,64 +79,70 @@
     </header>
 </div>
 <main>
-    <!--    <div th:object="${post}" class="row ">-->
-    <!--        <div class="col-md-3 col-sm-6">-->
-    <!--            <div class="form-group">-->
-    <!--                <label for="title" style="font-size: 30px">Title</label>-->
-    <!--                <input type="text" id="title" name="title" class="form-control-plaintext border border-dark" th:field="*{title}">-->
-    <!--            </div>-->
-    <!--            <div class="form-group ">-->
-    <!--                <label for="body" style="font-size: 30px"   >Body</label>-->
-    <!--                <input type="text" id="body" name="body" class="form-control-plaintext border border-dark" th:field="*{body}">-->
-    <!--            </div>-->
-    <!--        </div>-->
-    <!--    </div>-->
-
     <div class="album py-5 bg-light" th:object="${post}">
         <div class="container">
-            <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+            <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3 d-flex justify-content-md-between">
                 <div class="col">
                     <div class="card shadow-sm">
                         <div class="card-body">
-                            <p>Author: <small class="text-muted"
-                                              th:text="${post.getUser().getFirstName().toUpperCase()}"></small></p>
+                            <p><strong>Author:</strong>
+                                <small class="text-muted"
+                                       th:text="${post.getUser().getFirstName().toUpperCase()}"></small>
+                            </p>
                             <div>
-                                <h3 th:text="${post.getTitle()}">Title</h3>
+                                <p><strong>Title:</strong>
+                                    <span th:text="${post.getTitle().toUpperCase()}"></span>
+                                </p>
                             </div>
-                            <p class="card-text" th:text="${post.getBody()}"></p>
+                            <p><strong>BODY: </strong>
+                                <br><span th:text="${post.getBody()}"></span>
+                            </p>
 
-                            <strong>ALL COMMENTS ARE HERE</strong>
-                            <div class="col" th:each="comment: ${commentList} ">
-
-                                <div class="card shadow-sm">
-                                    <div class="card-body">
-                                        <p><strong>COMMENT AUTHOR: </strong>
-                                            <span th:text="${comment.getUser().getUsername()}"></span>
-                                        </p>
-                                        <p><strong>COMMENT BODY: </strong>
-                                            <span th:text="${comment.getCommentBody()}"></span>
-                                        </p>
-                                    </div>
-                                </div>
-                            </div>
-                            <section>
-                                <form method="POST" th:action="@{/posts/{id}/comments/create(id= ${post.id})}" th:object="${createComment}">
-                                    <h2>ADD YOUR COMMENT</h2>
-                                    <label for="body">Text:</label>
-                                    <textarea name="text" id="body" cols="30" rows="5"
-                                              th:field="*{commentBody}"></textarea>
-                                    <br>
-
-                                    <button>ADD COMMENT</button>
-                                </form>
-                            </section>
-<!--                            <div class="d-flex justify-content-between align-items-center">-->
-<!--                                <div class="btn-group">-->
-<!--                                    <a th:href="@{/comments/create}">ADD COMMENT</a>-->
-<!--                                </div>-->
-<!--                            </div>-->
+                            <!--                            <div class="d-flex justify-content-between align-items-center">-->
+                            <!--                                <div class="btn-group">-->
+                            <!--                                    <a th:href="@{/comments/create}">ADD COMMENT</a>-->
+                            <!--                                </div>-->
+                            <!--                            </div>-->
                         </div>
                     </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3 d-flex justify-content-md-between">
+            <div class="col">
+                <br>
+                <div class="album py-5 bg-light">
+                    <div>
+                        <div class="col" th:each="comment: ${commentList} ">
+                            <div class="card shadow-sm">
+                                <div class="card-body">
+                                    <p><strong>COMMENT AUTHOR: </strong>
+                                        <span th:text="${comment.getUser().getUsername()}"></span>
+                                    </p>
+                                    <p><strong>COMMENT BODY: </strong>
+                                        <span th:text="${comment.getCommentBody()}"></span>
+                                    </p>
+<!--                                    //TODO HOW TO MAKE BUTTONS WITH WORKING th:tag-->
+                                    <a th:href="@{/posts/{postId}/comments/{id}/delete(id= ${comment.id}, postId=${post.id})}">DELETE COMMENT</a>
+                                    <a th:href="@{/posts/{postId}/comments/{id}/delete(id= ${comment.id}, postId=${post.id})}">EDIT COMMENT</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <section>
+                        <form method="POST" th:action="@{/posts/{id}/comments/create(id= ${post.id})}"
+                              th:object="${createComment}">
+                            <h3>WRITE YOUR COMMENT</h3>
+                            <label for="body">Text:</label>
+                            <textarea name="text" id="body" cols="30" rows="5"
+                                      th:field="*{commentBody}"></textarea>
+                            <br>
+
+                            <button>SAVE COMMENT</button>
+                        </form>
+                    </section>
                 </div>
             </div>
         </div>
