@@ -87,8 +87,10 @@ public class PostController {
 
     @PreAuthorize("hasRole('ADMIN') or principal.id == #post.user.id")
     @PostMapping("posts/{id}/edit")
-    public String editPost(Post post, @AuthenticationPrincipal User user) {
-        postService.updatedPost(post, user);
+    public String editPost(@PathVariable("id") Post post,
+                           @AuthenticationPrincipal User user,
+                           Post updatedPost) {
+        postService.updatedPost(updatedPost, user);
         return "redirect:/";
     }
 }

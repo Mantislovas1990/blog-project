@@ -14,10 +14,10 @@
     <link rel="canonical" href="https://getbootstrap.com/docs/5.0/examples/sign-in/">
 
     <!-- Bootstrap core CSS -->
-    <link rel="stylesheet" href="/css/bootstrap.min.css"  th:href="@{/css/bootstrap.min.css}"/>
+    <link rel="stylesheet" href="/css/bootstrap.min.css" th:href="@{/css/bootstrap.min.css}"/>
 
     <!-- Custom styles for this template -->
-    <link rel="stylesheet" href="/css/login.css"  th:href="@{/css/login.css}" />
+    <link rel="stylesheet" href="/css/login.css" th:href="@{/css/login.css}"/>
 
     <link rel="canonical" href="https://getbootstrap.com/docs/5.0/examples/album/">
 
@@ -68,7 +68,8 @@
                 </li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
-                <li><a th:href="@{/users/register}" th:classappend="${#request.getRequestURI().equals('/register')} ? active">
+                <li><a th:href="@{/users/register}"
+                       th:classappend="${#request.getRequestURI().equals('/register')} ? active">
                     <span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
                 <li><a th:href="@{/users/login}" th:classappend="${#request.getRequestURI().equals('/login')} ? active">
                     <span class="glyphicon glyphicon-log-in"></span> Login</a></li>
@@ -83,15 +84,15 @@
         <h1 class="h3 mb-3 fw-normal">Please Login</h1>
 
         <div class="form-floating">
-            <label for="username">User Name</label>
             <input type="text" class="form-control" id="username" name="username" placeholder="UserName"
                    th:field="*{username}">
+            <label>User Name</label>
         </div>
         <div class="form-floating">
-            <label for="password">Password</label>
-            <input type="password" class="form-control" id="password" placeholder="password" th:field="*{password}">
+            <input type="password" class="form-control" id="password" placeholder="password"
+                   th:field="*{password}">
+            <label >Password</label>
         </div>
-
         <div class="checkbox mb-3">
             <label>
                 <input type="checkbox" value="remember-me"> Remember me
