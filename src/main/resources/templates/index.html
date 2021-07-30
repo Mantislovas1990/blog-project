@@ -4,88 +4,12 @@
       xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 
 <head th:replace="fragments/layout :: head(#{index.title})"></head>
-<!--    <meta charset="utf-8">-->
-<!--    <meta name="viewport" content="width=device-width, initial-scale=1">-->
-<!--    <meta name="description" content="">-->
-<!--    <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">-->
-<!--    <meta name="generator" content="Hugo 0.84.0">-->
-<!--    <title>Home Page</title>-->
 
-<!--    <link rel="canonical" href="https://getbootstrap.com/docs/5.0/examples/album/">-->
-<!--    &lt;!&ndash; Bootstrap core CSS &ndash;&gt;-->
-<!--    <link rel="stylesheet" href="/css/bootstrap.min.css" th:href="@{/css/bootstrap.min.css}"/>-->
-
-<!--    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">-->
-<!--    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>-->
-<!--    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>-->
-<!--    <style>-->
-<!--        .bd-placeholder-img {-->
-<!--            font-size: 1.125rem;-->
-<!--            text-anchor: middle;-->
-<!--            -webkit-user-select: none;-->
-<!--            -moz-user-select: none;-->
-<!--            user-select: none;-->
-<!--        }-->
-
-<!--        @media (min-width: 768px) {-->
-<!--            .bd-placeholder-img-lg {-->
-<!--                font-size: 3.5rem;-->
-<!--            }-->
-<!--        }-->
-
-<!--        body main p span {-->
-
-<!--            overflow: hidden;-->
-<!--            width: 100%;-->
-<!--            height: 100%;-->
-<!--            display: -webkit-box;-->
-<!--            -webkit-line-clamp: 1;-->
-<!--            -webkit-box-orient: vertical;-->
-<!--        }-->
-
-<!--    </style>-->
-<!--</head>-->
 <body style="background-color: #eee;, height:100%;">
 <div>
 
     <header th:replace="fragments/layout :: header"></header>
-<!--    <header class="container navbar-expand-lg">-->
-<!--        <nav class="navbar navbar-inverse">-->
-<!--            <div class="container-fluid">-->
-<!--                <div class="navbar-header">-->
-<!--                    <a class="navbar-brand" href="/">BL0G</a>-->
-<!--                </div>-->
-<!--                <ul class="nav navbar-nav">-->
-<!--                    <li><a th:href="@{/posts/create}">Create Post</a></li>-->
-<!--                    <li sec:authorize="isAuthenticated()" class="nav-item dropdown">-->
-<!--                        <a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-bs-toggle="dropdown"-->
-<!--                           aria-expanded="false"-->
-<!--                           th:text="${#locale.toLanguageTag().toUpperCase()}"-->
-<!--                        ></a>-->
-<!--                        <ul class="dropdown-menu" aria-labelledby="dropdown01">-->
-<!--                            <li><a class="dropdown-item" th:href="@{''(lang='lt')}"-->
-<!--                                   th:unless="${#locale.toString().equals('lt')}">LT</a></li>-->
-<!--                            <li><a class="dropdown-item" th:href="@{''(lang='en')}"-->
-<!--                                   th:unless="${#locale.toString().equals('en')}">EN</a></li>-->
-<!--                        </ul>-->
-<!--                    </li>-->
 
-<!--                </ul>-->
-
-<!--                <p sec:authorize="isAuthenticated()" style="color: white">-->
-<!--                    Welcome <span sec:authentication="principal.username" style="color: white"></span>-->
-<!--                </p>-->
-
-<!--                <ul class="nav navbar-nav navbar-right">-->
-
-<!--                    <li><a th:href="@{/users/register}">-->
-<!--                        <span class="glyphicon glyphicon-user"></span> Sign Up</a></li>-->
-<!--                    <li><a th:href="@{/users/login}">-->
-<!--                        <span class="glyphicon glyphicon-log-in"></span> Login</a></li>-->
-<!--                </ul>-->
-<!--            </div>-->
-<!--        </nav>-->
-<!--    </header>-->
 </div>
 <main style="background-color: #eee; height: 100%;">
     <div class="album py-5 bg-light w-100 p-3">
@@ -113,13 +37,17 @@
                                                 th:onclick="'location.href = \'/posts/' + ${post.id} + '/view\';'"
                                                 class="btn  btn btn-secondary btn-outline-dark m-2">View post
                                         </button>
-                                        <button type="button"
+                                        <button type="button" class="btn  btn btn-secondary btn-outline-dark m-2 "
                                                 th:onclick="'location.href = \'/posts/' + ${post.id} + '/delete\';'"
-                                                class="btn  btn btn-secondary btn-outline-dark m-2 ">delete post
+                                                th:if="${#authentication.getName()} == ${post.getUser().getUsername()}
+                                                        OR ${#authorization.expression('hasRole(''ROLE_ADMIN'')')}">
+                                            delete post
                                         </button>
-                                        <button type="button"
+                                        <button type="button" class="btn  btn btn-secondary btn-outline-dark m-2"
                                                 th:onclick="'location.href = \'/posts/' + ${post.id} + '/edit\';'"
-                                                class="btn  btn btn-secondary btn-outline-dark m-2">edit post
+                                                th:if="${#authentication.getName()} == ${post.getUser().getUsername()}
+                                                        OR ${#authorization.expression('hasRole(''ROLE_ADMIN'')')}">
+                                            edit post
                                         </button>
                                     </div>
                                     <p><strong>Posted At: </strong>
@@ -139,12 +67,6 @@
 
 <div>
     <footer th:replace="fragments/layout :: footer"></footer>
-<!--    <footer class="text-center text-white container" style="background-color: #222223;">-->
-<!--        <div class="container p-4"></div>-->
-<!--        <div style="color: #9c9c9d">-->
-<!--            © 2021 Spring MVC-->
-<!--        </div>-->
-<!--    </footer>-->
 </div>
 
 
