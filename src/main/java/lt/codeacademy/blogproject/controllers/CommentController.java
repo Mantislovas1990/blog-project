@@ -46,19 +46,20 @@ public class CommentController {
 
     @PreAuthorize("hasRole('ADMIN') or principal.id == #comment.user.id")
     @GetMapping("/posts/{postId}/comments/{id}/edit")
-    public String editPost(@PathVariable("postId") Post post,
+    public String editComment(@PathVariable("postId") Post post,
                            @PathVariable("id") Comment comment,
                            @PathVariable Long id, Model model) {
         model.addAttribute("editComment", commentService.getCommentById(id));
         return "comments/edit";
     }
 
-    //    @PreAuthorize("hasRole('ADMIN') or principal.id == #post.user.id")
+    @PreAuthorize("hasRole('ADMIN') or principal.id == #comment.user.id")
     @PostMapping("/posts/{postId}/comments/{id}/edit")
-    public String editPost(Comment comment,
+    public String editComment(@PathVariable("id") Comment comment,
+                           @PathVariable("postId") Post post,
                            @AuthenticationPrincipal User user,
-                           @PathVariable("postId") Post post) {
-        commentService.updatedComment(post, user, comment);
+                           Comment updatedComment){
+        commentService.updatedComment(post, user, updatedComment);
         return "redirect:/posts/" + post.getId() + "/view";
     }
 
