@@ -48,7 +48,7 @@ CREATE TABLE roles
 
 CREATE TABLE user_role
 (
-    user_id BIGINT REFERENCES "users"(id),
+    user_id BIGINT REFERENCES users(id),
     role_id BIGINT REFERENCES roles(id)
 );
 
