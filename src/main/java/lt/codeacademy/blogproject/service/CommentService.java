@@ -7,8 +7,6 @@ import lt.codeacademy.blogproject.repositories.CommentRepository;
 import lt.codeacademy.blogproject.repositories.PostRepository;
 import lt.codeacademy.blogproject.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -34,10 +32,6 @@ public class CommentService {
         return commentRepository.save(comment);
     }
 
-    public List<Comment> getAllComments() {
-        return commentRepository.findAll();
-
-    }
 
     public List<Comment> getCommentsByPostId(Long id){
       return  commentRepository.getAllByPostId(id);

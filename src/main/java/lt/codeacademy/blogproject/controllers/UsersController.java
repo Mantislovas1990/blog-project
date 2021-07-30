@@ -58,19 +58,4 @@ public class UsersController {
         }
     }
 
-//    @GetMapping(value = "/{id}/delete")
-//    public void deleteUser(@PathVariable Long id) {
-//        userService.deleteUser(id);
-//    }
-//
-//    @PutMapping(value = "/{id}/update")
-//    public void updateUser(
-//            @PathVariable Long id,
-//            @RequestParam(required = false) String userName,
-//            @RequestParam(required = false) String email,
-//            @RequestParam(required = false) String password) {
-//
-//        userService.updateUser(id, userName, email, password);
-//    }
-
 }

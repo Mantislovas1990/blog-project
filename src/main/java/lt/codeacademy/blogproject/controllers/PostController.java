@@ -85,7 +85,7 @@ public class PostController {
         return "posts/edit";
     }
 
-    //    @PreAuthorize("hasRole('ADMIN') or principal.id == #post.user.id")
+    @PreAuthorize("hasRole('ADMIN') or principal.id == #post.user.id")
     @PostMapping("posts/{id}/edit")
     public String editPost(Post post, @AuthenticationPrincipal User user) {
         postService.updatedPost(post, user);
