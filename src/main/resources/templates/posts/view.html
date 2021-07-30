@@ -117,25 +117,19 @@
                                     <p><strong>COMMENT BODY: </strong>
                                         <span th:text="${comment.getCommentBody()}"></span>
                                     </p>
-<!--                                    //TODO HOW TO MAKE BUTTONS WITH WORKING th:tag-->
-
-<!--                                    <div class="d-flex justify-content-between align-items-center">-->
-<!--                                        <div class="btn-group m-2">-->
-<!--                                            <button type="button"-->
-<!--                                                    th:onclick="'location.href = \'/posts/' + ${post.id} + '/view\';'"-->
-<!--                                                    class="btn  btn btn-secondary btn-outline-dark m-2">View post-->
-<!--                                            </button>-->
-<!--                                            <button type="button"-->
-<!--                                                    th:onclick="'location.href = \'/posts/' + ${post.id} + '/delete\';'"-->
-<!--                                                    class="btn  btn btn-secondary btn-outline-dark m-2 ">delete post-->
-<!--                                            </button>-->
-<!--                                            <button type="button"-->
-<!--                                                    th:onclick="'location.href = \'/posts/' + ${post.id} + '/edit\';'"-->
-<!--                                                    class="btn  btn btn-secondary btn-outline-dark m-2">edit post-->
-<!--                                            </button>-->
-<!--                                        </div>-->
-                                    <a th:href="@{/posts/{postId}/comments/{id}/delete(id= ${comment.id}, postId=${post.id})}">DELETE COMMENT</a>
-                                    <a th:href="@{/posts/{postId}/comments/{id}/delete(id= ${comment.id}, postId=${post.id})}">EDIT COMMENT</a>
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <div class="btn-group m-2">
+                                            <button type="button"
+                                                    th:onclick="'location.href = \'/posts/' + ${post.id}
+                                                     + '/comments/' + ${comment.id} + '/delete\' ;'"
+                                                    class="btn  btn btn-secondary btn-outline-dark m-2">DELETE COMMENT
+                                            </button>
+                                            <button type="button"
+                                                    th:onclick="'location.href = \'/posts/' + ${post.id}
+                                                     + '/comments/' + ${comment.id} + '/edit\' ;'"
+                                                    class="btn  btn btn-secondary btn-outline-dark m-2">EDIT COMMENT
+                                            </button>
+                                        </div>
                                 </div>
                             </div>
                         </div>

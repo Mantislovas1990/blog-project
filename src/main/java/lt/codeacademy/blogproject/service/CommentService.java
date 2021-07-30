@@ -50,4 +50,16 @@ public class CommentService {
     public void deleteComment(Comment comment){
         commentRepository.delete(comment);
     }
+
+    public Comment updatedComment(Post post, User user, Comment comment) {
+        Comment comment1 = getCommentById(comment.getId());
+
+        if (comment1 != null) {
+            comment.setCreatedAt(comment1.getCreatedAt());
+            comment.setUser(user);
+            comment.setPost(post);
+            return commentRepository.save(comment);
+        }
+        return null;
+    }
 }
