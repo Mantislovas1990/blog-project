@@ -2,11 +2,13 @@ package lt.codeacademy.blogproject.controllers;
 
 import lt.codeacademy.blogproject.entities.Comment;
 import lt.codeacademy.blogproject.entities.Post;
+import lt.codeacademy.blogproject.entities.User;
 import lt.codeacademy.blogproject.service.CommentService;
 import lt.codeacademy.blogproject.service.PostService;
 import lt.codeacademy.blogproject.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -66,7 +68,6 @@ public class PostController {
         return "posts/view";
     }
 
-
     @PreAuthorize("hasRole('ADMIN') or principal.id == #post.user.id")
     @GetMapping("/posts/{id}/delete")
     public String deletePost(
@@ -84,10 +85,12 @@ public class PostController {
         return "posts/edit";
     }
 
-    @PreAuthorize("hasRole('ADMIN') or principal.id == #post.user.id")
+//    @PreAuthorize("hasRole('ADMIN') or principal.id == #post.user.id")
     @PostMapping("posts/{id}/edit")
-    public String editPost(Post post) {
-            postService.savePost(post);
+    public String editPost(Post post, @AuthenticationPrincipal User user) {
+//            post.setCreatedAt(post.getCreatedAt());
+
+            postService.updatedPost(post,user);
         return "redirect:/";
     }
 }

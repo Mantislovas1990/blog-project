@@ -1,5 +1,5 @@
 -- DROP TABLE IF EXISTS comments;
--- DROP TABLE IF EXISTS articles;
+-- DROP TABLE IF EXISTS articles ;
 -- DROP TABLE IF EXISTS user_role;
 -- DROP TABLE IF EXISTS roles;
 -- DROP TABLE IF EXISTS users;
@@ -27,7 +27,6 @@ CREATE TABLE articles
     updated_at  timestamp without time zone DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (author_id) REFERENCES users (id)
 );
-
 
 CREATE TABLE comments
 (
@@ -57,20 +56,3 @@ INSERT INTO roles (name)
 VALUES ('USER'),
        ('ADMIN');
 
--- INSERT INTO user_role (user_id, role_id)
--- VALUES (1, 1),
---        (1, 2),
---        (2, 1);
-
-
--- INSERT INTO articles(id, author_id, title, body)
--- VALUES (1, 1, 'fist author', 'first tittle',
---         'Why Is Customer Service Still So Lousy (Financial Services Web Design Edition)?'),
---        (2, 2, 'second author', 'second tittle',
---         'Why Is Customer Service Still So Lousy (Financial Services Web Design Edition)?'),
---        (3, 3, 'third author', 'third tittle',
---         'Why Is Customer Service Still So Lousy (Financial Services Web Design Edition)?'),
---        (4, 4, 'fourth author', 'fourth tittle',
---         'Why Is Customer Service Still So Lousy (Financial Services Web Design Edition)?'),
---        (5, 5, 'fifth author', 'fifth tittle',
---         'Why Is Customer Service Still So Lousy (Financial Services Web Design Edition)?');

@@ -3,6 +3,7 @@ package lt.codeacademy.blogproject.service;
 
 import lt.codeacademy.blogproject.entities.Comment;
 import lt.codeacademy.blogproject.entities.Post;
+import lt.codeacademy.blogproject.entities.User;
 import lt.codeacademy.blogproject.repositories.PostRepository;
 import lt.codeacademy.blogproject.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,6 +39,18 @@ public class PostService {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         post.setUser(userRepository.getUserByUsername(authentication.getName()));
         return postRepository.save(post);
+    }
+
+    public Post updatedPost(Post post, User user) {
+        Post post1 = getPostById(post.getId());
+
+        if (post1 != null) {
+            post.setCreatedAt(post1.getCreatedAt());
+//            Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+            post.setUser(user);
+            return postRepository.save(post);
+        }
+        return null;
     }
 
     public List<Post> getAllPosts() {

@@ -122,13 +122,11 @@
                                                 class="btn  btn btn-secondary btn-outline-dark m-2">edit post
                                         </button>
                                     </div>
-
-<!--                                    //TODO CHECK WHY THERE IS PROBLEM WITH DATE AFTER UPDATE-->
-<!--                                    <p><strong>Posted At: </strong>-->
-<!--                                        <span th:text="${post.getCreatedAt().dayOfWeek.name()} +-->
-<!--                                ' ' +${post.getCreatedAt().getHour()} +-->
-<!--                                 ':' +${post.getCreatedAt().getMinute()} +-->
-<!--                                 ':'+ ${post.getCreatedAt().getSecond()}"></span></p>-->
+                                    <p><strong>Posted At: </strong>
+                                        <span th:text="${post.getCreatedAt().dayOfWeek.name()} +
+                                ' ' +${post.getCreatedAt().getHour()} +
+                                 ':' +${post.getCreatedAt().getMinute()} +
+                                 ':'+ ${post.getCreatedAt().getSecond()}"></span></p>
                                 </div>
                             </div>
                         </div>
