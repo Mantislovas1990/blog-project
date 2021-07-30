@@ -50,9 +50,7 @@
                 <a class="navbar-brand" href="/">BL0G</a>
             </div>
             <ul class="nav navbar-nav">
-                <li><a href="#">Create Post</a></li>
-                <li><a href="#">Show ALL Users</a></li>
-                <li><a href="#">Page 3</a></li>
+                <li><a th:href="@{/posts/create}">Create Post</a></li>
                 <li sec:authorize="isAuthenticated()" class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-bs-toggle="dropdown"
                        aria-expanded="false"

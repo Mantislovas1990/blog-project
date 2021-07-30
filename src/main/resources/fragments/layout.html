@@ -1,27 +1,63 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 
-<head th:fragment="head">
+<head th:fragment="head(title)">
+    <title th:text="*{title}"></title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
+    <meta name="generator" content="Hugo 0.84.0">
+
+    <link rel="canonical" href="https://getbootstrap.com/docs/5.0/examples/album/">
+    <!-- Bootstrap core CSS -->
+    <link rel="stylesheet" href="/css/bootstrap.min.css" th:href="@{/css/bootstrap.min.css}"/>
+    <link rel="stylesheet" href="/css/footer.css" th:href="@{/css/footer.css}"/>
+
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <style>
+        .bd-placeholder-img {
+            font-size: 1.125rem;
+            text-anchor: middle;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            user-select: none;
+        }
+
+        @media (min-width: 768px) {
+            .bd-placeholder-img-lg {
+                font-size: 3.5rem;
+            }
+        }
+
+        body main p span {
+
+            overflow: hidden;
+            width: 100%;
+            height: 100%;
+            display: -webkit-box;
+            -webkit-line-clamp: 1;
+            -webkit-box-orient: vertical;
+        }
+
+    </style>
 </head>
 
 <body >
 
-<header th:fragment="header" class=" container navbar-expand-lg">
+<header th:fragment="header" class="container navbar-expand-lg">
     <nav class="navbar navbar-inverse">
         <div class="container-fluid">
             <div class="navbar-header">
-                <a class="navbar-brand" href="#">BL0G</a>
+                <a class="navbar-brand" th:href="@{/}">BL0G</a>
             </div>
             <ul class="nav navbar-nav">
-                <li class="active"><a th:href="@{/}">Home</a></li>
-                <li><a href="#">Create Post</a></li>
-                <li><a href="#">Page 2</a></li>
-                <li><a href="#">Page 3</a></li>
+                <li sec:authorize="isAuthenticated()">
+                    <a th:href="@{/posts/create}">Create Post</a>
+                </li>
                 <li sec:authorize="isAuthenticated()" class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-bs-toggle="dropdown"
                        aria-expanded="false"
@@ -34,10 +70,21 @@
                                th:unless="${#locale.toString().equals('en')}">EN</a></li>
                     </ul>
                 </li>
+
             </ul>
+
+            <p sec:authorize="isAuthenticated()" style="color: white">
+                Welcome <span sec:authentication="principal.username" style="color: white"></span>
+            </p>
+
             <ul class="nav navbar-nav navbar-right">
-                <li><a href="#"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
-                <li><a href="#"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+
+                <li sec:authorize="isAnonymous()"><a th:href="@{/users/register}">
+                    <span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
+                <li sec:authorize="isAnonymous()"><a th:href="@{/users/login}">
+                    <span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+                <li sec:authorize="isAuthenticated()"><a th:href="@{/logout}">
+                    <span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
             </ul>
         </div>
     </nav>
@@ -45,11 +92,11 @@
 
 
 <div>
-<footer th:fragment="footer" class="text-center text-white" style="background-color: #222223;">
+<footer th:fragment="footer" class="text-center text-white container" style="background-color: #222223;">
     <div class="container p-4"></div>
-        <div class="text-center text-dark p-3" style="color: #9c9c9d">
-            © 2021 Spring MVC
-        </div>
+    <div style="color: #9c9c9d">
+        © 2021 Spring MVC
+    </div>
 </footer>
 </div>
 </body>
