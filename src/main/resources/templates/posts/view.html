@@ -2,7 +2,7 @@
 <html lang="en"
       xmlns:th="http://www.thymeleaf.org"
       xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
-<head th:replace="fragments/layout :: head(#{index.view})"></head>
+<head th:replace="fragments/layout :: head(#{view.title})"></head>
 <body>
 <div>
     <header th:replace="fragments/layout :: header"></header>
@@ -14,16 +14,16 @@
                 <div class="col">
                     <div class="card shadow-sm">
                         <div class="card-body">
-                            <p><strong>Author:</strong>
+                            <p><strong th:text="#{authorName}">Author:</strong>
                                 <small class="text-muted"
                                        th:text="${post.getUser().getFirstName().toUpperCase()}"></small>
                             </p>
                             <div>
-                                <p><strong>Title:</strong>
+                                <p><strong th:text="#{titleName}">Title:</strong>
                                     <span th:text="${post.getTitle().toUpperCase()}"></span>
                                 </p>
                             </div>
-                            <p><strong>BODY: </strong>
+                            <p><strong th:text="#{postBody}">BODY: </strong>
                                 <br><span th:text="${post.getBody()}"></span>
                             </p>
                         </div>
@@ -40,21 +40,21 @@
                             <div class="col" th:each="comment: ${commentList} ">
                                 <div class="card shadow-sm">
                                     <div class="card-body">
-                                        <p><strong>COMMENT AUTHOR: </strong>
+                                        <p><strong th:text="#{commentAuthor}">COMMENT AUTHOR: </strong>
                                             <span th:text="${comment.getUser().getUsername()}"></span>
                                         </p>
-                                        <p><strong>COMMENT BODY: </strong>
+                                        <p><strong th:text="#{commentBody}">COMMENT BODY: </strong>
                                             <span th:text="${comment.getCommentBody()}"></span>
                                         </p>
                                         <div class="d-flex justify-content-between align-items-center">
                                             <div class="btn-group m-2">
-                                                <button type="button" class="btn  btn btn-secondary btn-outline-dark m-2"
+                                                <button th:text="#{button.deleteComment}"type="button" class="btn  btn btn-secondary btn-outline-dark m-2"
                                                         th:onclick="'location.href = \'/posts/' + ${post.id}
                                                      + '/comments/' + ${comment.id} + '/delete\' ;'"
                                                         th:if="${#authentication.getName()} == ${comment.getUser().getUsername()}
                                                         OR ${#authorization.expression('hasRole(''ROLE_ADMIN'')')}">DELETE COMMENT
                                                 </button>
-                                                <button  type="button"  class="btn  btn btn-secondary btn-outline-dark m-2"
+                                                <button  th:text="#{button.editComment}" type="button"  class="btn  btn btn-secondary btn-outline-dark m-2"
                                                         th:onclick="'location.href = \'/posts/' + ${post.id}
                                                      + '/comments/' + ${comment.id} + '/edit\' ;'"
                                                         th:if="${#authentication.getName()} == ${comment.getUser().getUsername()}
@@ -68,12 +68,11 @@
                             <section sec:authorize="isAuthenticated()">
                                 <form  method="POST" th:action="@{/posts/{id}/comments/create(id= ${post.id})}"
                                       th:object="${createComment}">
-                                    <h3>WRITE YOUR COMMENT</h3>
-                                    <label for="body">Text:</label>
+                                    <h3 th:text="#{writeYourComment}">WRITE YOUR COMMENT</h3>
                                     <textarea name="text" id="body" cols="30" rows="5"
-                                              th:field="*{commentBody}"></textarea>
+                                              th:field="*{commentBody}" placeholder="TEXT AREA HERE"></textarea>
                                     <br>
-                                    <button>SAVE COMMENT</button>
+                                    <button th:text="#{button.saveComment}">SAVE COMMENT</button>
                                 </form>
                             </section>
                         </div>

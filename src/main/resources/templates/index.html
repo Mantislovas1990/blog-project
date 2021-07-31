@@ -19,16 +19,16 @@
                     <div class="col">
                         <div class="card shadow-sm">
                             <div class="card-body">
-                                <p><strong>Author:</strong>
+                                <p><strong th:text="#{authorName}">Author:</strong>
                                     <small class="text-muted"
                                            th:text="${post.getUser().getFirstName().toUpperCase()}"></small>
                                 </p>
                                 <div>
-                                    <p><strong>Title:</strong>
+                                    <p><strong th:text="#{titleName}">Title:</strong>
                                         <span th:text="${post.getTitle().toUpperCase()}"></span>
                                     </p>
                                 </div>
-                                <p><strong>BODY: </strong>
+                                <p><strong th:text="#{postBody}">BODY: </strong>
                                     <br>
                                     <span style="  overflow: hidden;
                                             width: 100%;
@@ -42,28 +42,35 @@
                                 </p>
                                 <div class="d-flex justify-content-between align-items-center">
                                     <div class="btn-group m-2">
-                                        <button type="button"
+                                        <button th:text="#{button.viewPost}" type="button"
                                                 th:onclick="'location.href = \'/posts/' + ${post.id} + '/view\';'"
-                                                class="btn  btn btn-secondary btn-outline-dark m-2">View post
+                                                class="btn  btn-sm btn-secondary btn-outline-dark m-1">View post
                                         </button>
-                                        <button type="button" class="btn  btn btn-secondary btn-outline-dark m-2 "
+                                        <button th:text="#{button.deletePost}" type="button"
+                                                class="btn btn-sm btn-secondary btn-outline-dark m-1"
                                                 th:onclick="'location.href = \'/posts/' + ${post.id} + '/delete\';'"
                                                 th:if="${#authentication.getName()} == ${post.getUser().getUsername()}
                                                         OR ${#authorization.expression('hasRole(''ROLE_ADMIN'')')}">
                                             delete post
                                         </button>
-                                        <button type="button" class="btn  btn btn-secondary btn-outline-dark m-2"
+                                        <button th:text="#{button.editPost}" type="button"
+                                                class="btn  btn-sm btn-secondary btn-outline-dark m-1"
                                                 th:onclick="'location.href = \'/posts/' + ${post.id} + '/edit\';'"
                                                 th:if="${#authentication.getName()} == ${post.getUser().getUsername()}
                                                         OR ${#authorization.expression('hasRole(''ROLE_ADMIN'')')}">
                                             edit post
                                         </button>
                                     </div>
-                                    <p><strong>Posted At: </strong>
-                                        <span th:text="${post.getCreatedAt().dayOfWeek.name()} +
-                                ' ' +${post.getCreatedAt().getHour()} +
-                                 ':' +${post.getCreatedAt().getMinute()} +
-                                 ':'+ ${post.getCreatedAt().getSecond()}"></span></p>
+                                    <p><strong th:text="#{postCreatedAt}">Posted At: </strong>
+                                        <br>
+                                        <span
+                                            th:text="${post.getCreatedAt().toLocalDate()} +
+                                        ' ' +${post.getCreatedAt().getHour()} +
+                                         ':' +${post.getCreatedAt().getMinute()} +
+                                         ':'+ ${post.getCreatedAt().getSecond()}">
+
+                                        </span>
+                                    </p>
                                 </div>
                             </div>
                         </div>

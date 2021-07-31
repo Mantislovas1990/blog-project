@@ -31,11 +31,10 @@
                 font-size: 3.5rem;
             }
         }
-
     </style>
 </head>
 
-<body >
+<body>
 
 <header th:fragment="header" class="container navbar-expand-lg">
     <nav class="navbar navbar-inverse">
@@ -44,35 +43,38 @@
                 <a class="navbar-brand" th:href="@{/}">BL0G</a>
             </div>
             <ul class="nav navbar-nav">
-                <li sec:authorize="isAuthenticated()">
-                    <a th:href="@{/posts/create}">Create Post</a>
+                <li>
+                    <a th:text="#{homeButton}" th:href="@{/}">Home</a>
                 </li>
-                <li sec:authorize="isAuthenticated()" class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-bs-toggle="dropdown"
-                       aria-expanded="false"
-                       th:text="${#locale.toLanguageTag().toUpperCase()}"
-                    ></a>
-                    <ul class="dropdown-menu" aria-labelledby="dropdown01">
-                        <li><a class="dropdown-item" th:href="@{''(lang='lt')}"
-                               th:unless="${#locale.toString().equals('lt')}">LT</a></li>
-                        <li><a class="dropdown-item" th:href="@{''(lang='en')}"
-                               th:unless="${#locale.toString().equals('en')}">EN</a></li>
-                    </ul>
+                <li sec:authorize="isAuthenticated()">
+                    <a th:text="#{button.create}" th:href="@{/posts/create}">Create Post</a>
                 </li>
 
             </ul>
 
-            <p sec:authorize="isAuthenticated()" style="color: white">
-                Welcome <span sec:authentication="principal.username" style="color: white"></span>
+            <p  sec:authorize="isAuthenticated()" style="color: white">
+                <span th:text="#{loggedUser}"></span>
+                <span sec:authentication="principal.username" style="color: white"></span>
             </p>
 
             <ul class="nav navbar-nav navbar-right">
 
-                <li sec:authorize="isAnonymous()"><a th:href="@{/users/register}">
+                <li sec:authorize="isAuthenticated()">
+                    <a th:href="@{''(lang='lt')}"
+                       th:unless="${#locale.toString().equals('lt')}">LT Language
+                    </a>
+                </li>
+                <li sec:authorize="isAuthenticated()">
+                    <a th:href="@{''(lang='en')}"
+                       th:unless="${#locale.toString().equals('en')}">EN Language
+                    </a>
+                </li>
+
+                <li sec:authorize="isAnonymous()"><a th:text="#{register.title}" th:href="@{/users/register}">
                     <span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
-                <li sec:authorize="isAnonymous()"><a th:href="@{/users/login}">
+                <li sec:authorize="isAnonymous()"><a th:text="#{login.title}" th:href="@{/users/login}">
                     <span class="glyphicon glyphicon-log-in"></span> Login</a></li>
-                <li sec:authorize="isAuthenticated()"><a th:href="@{/logout}">
+                <li sec:authorize="isAuthenticated()"><a th:text="#{logout.title}" th:href="@{/logout}">
                     <span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
             </ul>
         </div>
@@ -81,12 +83,12 @@
 
 
 <div>
-<footer th:fragment="footer" class="text-center text-white container" style="background-color: #222223;">
-    <div class="container p-4"></div>
-    <div style="color: #9c9c9d">
-        © 2021 Spring MVC
-    </div>
-</footer>
+    <footer th:fragment="footer" class="text-center text-white container" style="background-color: #222223;">
+        <div class="container p-4"></div>
+        <div style="color: #9c9c9d">
+            © 2021 Spring MVC
+        </div>
+    </footer>
 </div>
 </body>
 </html>

@@ -44,37 +44,7 @@
 </head>
 <body class="text-center flex-column style" style="background-color: #e7e7e7;">
 
-<header class=" container navbar-expand-lg ">
-    <nav class="navbar navbar-inverse">
-        <div class="container-fluid">
-            <div class="navbar-header">
-                <a class="navbar-brand" href="/">BL0G</a>
-            </div>
-            <ul class="nav navbar-nav">
-                <li><a th:href="@{/posts/create}">Create Post</a></li>
-                <li sec:authorize="isAuthenticated()" class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-bs-toggle="dropdown"
-                       aria-expanded="false"
-                       th:text="${#locale.toLanguageTag().toUpperCase()}"
-                    ></a>
-                    <ul class="dropdown-menu" aria-labelledby="dropdown01">
-                        <li><a class="dropdown-item" th:href="@{''(lang='lt')}"
-                               th:unless="${#locale.toString().equals('lt')}">LT</a></li>
-                        <li><a class="dropdown-item" th:href="@{''(lang='en')}"
-                               th:unless="${#locale.toString().equals('en')}">EN</a></li>
-                    </ul>
-                </li>
-            </ul>
-            <ul class="nav navbar-nav navbar-right">
-                <li><a th:href="@{/users/register}"
-                       th:classappend="${#request.getRequestURI().equals('/register')} ? active">
-                    <span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
-                <li><a th:href="@{/users/login}" th:classappend="${#request.getRequestURI().equals('/login')} ? active">
-                    <span class="glyphicon glyphicon-log-in"></span> Login</a></li>
-            </ul>
-        </div>
-    </nav>
-</header>
+<header th:replace="fragments/layout :: header"></header>
 
 <main class="form-signin">
     <form method="POST" th:action="@{/login}" th:object="${user}">
@@ -102,12 +72,7 @@
 </main>
 
 <div>
-    <footer class="text-center text-white container" style="background-color: #222223;">
-        <div class="container p-4"></div>
-        <div style="color: #9c9c9d">
-            © 2021 Spring MVC
-        </div>
-    </footer>
+    <footer th:replace="fragments/layout :: footer"></footer>
 </div>
 
 </body>
