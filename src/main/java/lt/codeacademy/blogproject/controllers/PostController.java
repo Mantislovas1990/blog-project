@@ -48,8 +48,10 @@ public class PostController {
         return "/index";
     }
 
+    @PreAuthorize("(hasRole('ADMIN') or principal.id == user.id)")
     @GetMapping(value = "/posts/create")
-    public String createPost(Model model) {
+    public String createPost(Model model,
+                             @AuthenticationPrincipal User user) {
         model.addAttribute("post", new Post());
         return "/posts/create";
     }
