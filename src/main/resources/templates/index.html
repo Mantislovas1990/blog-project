@@ -29,7 +29,16 @@
                                     </p>
                                 </div>
                                 <p><strong>BODY: </strong>
-                                    <br><span th:text="${post.getBody()}"></span>
+                                    <br>
+                                    <span style="  overflow: hidden;
+                                            width: 100%;
+                                            height: 100%;
+                                            display: -webkit-box;
+                                            -webkit-line-clamp: 1;
+                                            -webkit-box-orient: vertical;"
+                                          th:text="${post.getBody()}">
+
+                                    </span>
                                 </p>
                                 <div class="d-flex justify-content-between align-items-center">
                                     <div class="btn-group m-2">
