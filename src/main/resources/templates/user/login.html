@@ -55,11 +55,13 @@
             <input type="text" class="form-control" id="username" name="username" placeholder="UserName"
                    th:field="*{username}">
             <label>User Name</label>
+<!--            <p th:if="${#fields.hasErrors('username')}" th:errors="*{username}" class="text-danger small">Error</p>-->
         </div>
         <div class="form-floating">
             <input type="password" class="form-control" id="password" placeholder="password"
                    th:field="*{password}">
             <label >Password</label>
+<!--            <p th:if="${#fields.hasErrors('password')}" th:errors="*{password}" class="text-danger small">Error</p>-->
         </div>
         <div class="checkbox mb-3">
             <label>
@@ -68,6 +70,7 @@
         </div>
         <button class="w-100 btn btn-lg btn-primary" style="background-color: #222223;" type="submit">Login</button>
         <p class="mt-5 mb-3 text-muted">&copy; 2021 Spring MVC</p>
+        <div class="form-group alert alert-danger" th:if="${param.error}">Invalid Username or password</div>
     </form>
 </main>
 

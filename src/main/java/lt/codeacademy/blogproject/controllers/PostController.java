@@ -28,14 +28,12 @@ public class PostController {
     private PostService postService;
 
 
+    @Autowired
     private CommentService commentService;
 
     @Autowired
     private UserService userService;
 
-    public PostController(CommentService commentService) {
-        this.commentService = commentService;
-    }
 
     @GetMapping
     public String home(HttpServletRequest request, HttpSession session) {
@@ -48,7 +46,7 @@ public class PostController {
         return "/index";
     }
 
-    @PreAuthorize("(hasRole('ADMIN') or principal.id == user.id)")
+    @PreAuthorize("(hasRole('ADMIN') or principal.id == #user.id)")
     @GetMapping(value = "/posts/create")
     public String createPost(Model model,
                              @AuthenticationPrincipal User user) {
@@ -56,8 +54,10 @@ public class PostController {
         return "/posts/create";
     }
 
+    @PreAuthorize("(hasRole('ADMIN') or principal.id == #user.id)")
     @PostMapping(value = "/posts/create")
-    public String saveNewPost(@Valid Post post) {
+    public String saveNewPost(@Valid Post post,
+                              @AuthenticationPrincipal User user) {
         postService.savePost(post);
         return "redirect:/";
     }
@@ -89,8 +89,8 @@ public class PostController {
 
     @PreAuthorize("hasRole('ADMIN') or principal.id == #post.user.id")
     @PostMapping("posts/{id}/edit")
-    public String editPost(@PathVariable("id") Post post,
-                           @AuthenticationPrincipal User user,
+    public String editPost(@AuthenticationPrincipal User user,
+                           @PathVariable Post post,
                            Post updatedPost) {
         postService.updatedPost(updatedPost, user);
         return "redirect:/";

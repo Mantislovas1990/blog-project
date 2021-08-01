@@ -47,5 +47,16 @@ public class UserService implements UserDetailsService {
         return userRepository.getUserByUsername(userName);
     }
 
+//    public User getUserByName(User user){
+//        return userRepository.getUserByUsername(user);
+//    }
+
+    public User getUserByUsername(String userName){
+        return userRepository.getUserByUsername(userName);
+    }
+
+    public User getUserByEmail(String email){
+        return userRepository.getUserByEmail(email);
+    }
 }
 

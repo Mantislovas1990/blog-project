@@ -23,7 +23,7 @@ public class CommentController {
     @Autowired
     private CommentService commentService;
 
-    @PreAuthorize("(hasRole('ADMIN') or principal.id == user.id)")
+    @PreAuthorize("(hasRole('ADMIN') or principal.id == #user.id)")
     @PostMapping("/posts/{postId}/comments/create")
     public String saveComment(
             @PathVariable("postId") Post post,

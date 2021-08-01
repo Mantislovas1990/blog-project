@@ -51,23 +51,28 @@
             <input type="text"  id="username" class="form-control" placeholder="UserName"
                    th:field="*{username}">
             <label>User Name</label>
+            <p th:if="${#fields.hasErrors('username')}" th:errors="*{username}" class="text-danger small">Error</p>
         </div>
         <div class="form-floating">
             <input type="email" id="email" class="form-control" placeholder="Email"
                    th:field="*{email}">
             <label>Email</label>
+            <p th:if="${#fields.hasErrors('email')}" th:errors="*{email}" class="text-danger small">Error</p>
         </div>
         <div class="form-floating">
             <input type="password" id="password" class="form-control" placeholder="password" th:field="*{password}">
             <label>Password</label>
+            <p th:if="${#fields.hasErrors('password')}" th:errors="*{password}" class="text-danger small">Error</p>
         </div>
         <div class="form-floating">
             <input type="text" id="firstName" class="form-control" placeholder="First Name" th:field="*{firstName}">
             <label>First Name</label>
+            <p th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}" class="text-danger small">Error</p>
         </div>
         <div class="form-floating">
             <input type="text" id="lastName" class="form-control" placeholder="Last Name" th:field="*{lastName}">
             <label>Last Name</label>
+            <p th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}" class="text-danger small">Error</p>
         </div>
         <br><br>
         <button class="w-100 btn btn-lg btn-primary" style="background-color: #222223;" type="submit">Register</button>
