@@ -56,7 +56,7 @@ INSERT INTO roles (name)
 VALUES ('USER'),
        ('ADMIN');
 
-INSERT INTO users(id, user_name, first_name, last_name, , email, password)
+INSERT INTO users(id, user_name, first_name, last_name , email, password)
 VALUES (500, 'FirstUser', 'First Name', 'First Name', 'firstEmail@email.com', '1111'),
        (501, 'SecondUser', 'Second Name', 'Second Name', 'secondtEmail@email.com', '2222');
 

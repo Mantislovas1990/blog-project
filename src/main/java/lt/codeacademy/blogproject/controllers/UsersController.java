@@ -11,6 +11,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.management.relation.RoleNotFoundException;
@@ -67,11 +68,12 @@ public class UsersController {
             bindingResult.rejectValue("email", "error.email", "Email already exists");
             return "user/register";
         }
-         else {
+         if ( !bindingResult.hasErrors() ){
             userService.addNewUser(user);
-            attributes.addFlashAttribute("successMsg", "Your car has been successfully created!");
-            return "redirect:/";
+             attributes.addFlashAttribute("successMessage", "User has been created");
+
         }
+        return "user/login";
     }
 
 }
