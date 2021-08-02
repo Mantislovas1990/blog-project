@@ -67,8 +67,9 @@ public class UsersController {
             bindingResult.rejectValue("email", "error.email", "Email already exists");
             return "user/register";
         }
-
-        return "redirect:/";
+        userService.addNewUser(user);
+        return "user/login";
     }
-
 }
+
+
