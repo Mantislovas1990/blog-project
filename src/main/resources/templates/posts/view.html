@@ -48,33 +48,43 @@
                                         </p>
                                         <div class="d-flex justify-content-between align-items-center">
                                             <div class="btn-group m-2">
-                                                <button th:text="#{button.deleteComment}"type="button" class="btn  btn btn-secondary btn-outline-dark m-2"
+                                                <button th:text="#{button.deleteComment}" type="button"
+                                                        class="btn  btn btn-secondary btn-outline-dark m-2"
                                                         th:onclick="'location.href = \'/posts/' + ${post.id}
                                                      + '/comments/' + ${comment.id} + '/delete\' ;'"
                                                         th:if="${#authentication.getName()} == ${comment.getUser().getUsername()}
-                                                        OR ${#authorization.expression('hasRole(''ROLE_ADMIN'')')}">DELETE COMMENT
+                                                        OR ${#authorization.expression('hasRole(''ROLE_ADMIN'')')}">
+                                                    DELETE COMMENT
                                                 </button>
-                                                <button  th:text="#{button.editComment}" type="button"  class="btn  btn btn-secondary btn-outline-dark m-2"
+                                                <button th:text="#{button.editComment}" type="button"
+                                                        class="btn  btn btn-secondary btn-outline-dark m-2"
                                                         th:onclick="'location.href = \'/posts/' + ${post.id}
                                                      + '/comments/' + ${comment.id} + '/edit\' ;'"
                                                         th:if="${#authentication.getName()} == ${comment.getUser().getUsername()}
-                                                        OR ${#authorization.expression('hasRole(''ROLE_ADMIN'')')}">EDIT COMMENT
+                                                        OR ${#authorization.expression('hasRole(''ROLE_ADMIN'')')}">EDIT
+                                                    COMMENT
                                                 </button>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                            <section sec:authorize="isAuthenticated()">
-                                <form  method="POST" th:action="@{/posts/{id}/comments/create(id= ${post.id})}"
-                                      th:object="${createComment}">
-                                    <h3 th:text="#{writeYourComment}">WRITE YOUR COMMENT</h3>
-                                    <textarea name="text" id="body" cols="30" rows="5"
-                                              th:field="*{commentBody}" placeholder="TEXT AREA HERE"></textarea>
-                                    <br>
-                                    <button th:text="#{button.saveComment}">SAVE COMMENT</button>
-                                </form>
-                            </section>
+                            <div class="d-flex justify-content-center">
+                                <div>
+                                    <section sec:authorize="isAuthenticated()">
+                                        <form method="POST" th:action="@{/posts/{id}/comments/create(id= ${post.id})}"
+                                              th:object="${createComment}">
+                                            <h3 th:text="#{writeYourComment}">WRITE YOUR COMMENT</h3>
+                                            <textarea name="text" id="body" cols="30" rows="5"
+                                                      th:field="*{commentBody}" placeholder="TEXT AREA HERE"></textarea>
+                                            <br>
+                                            <div class="d-flex justify-content-center">
+                                                <button th:text="#{button.saveComment}">SAVE COMMENT</button>
+                                            </div>
+                                        </form>
+                                    </section>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
