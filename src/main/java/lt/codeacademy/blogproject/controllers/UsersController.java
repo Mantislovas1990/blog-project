@@ -11,7 +11,6 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.management.relation.RoleNotFoundException;
@@ -51,7 +50,7 @@ public class UsersController {
     @PostMapping(value = "/register")
     public String registerNewUser(@Valid User user,
                                   BindingResult bindingResult,
-                                  RedirectAttributes attributes) throws  RoleNotFoundException {
+                                  RedirectAttributes attributes) throws RoleNotFoundException {
 
         User userName = this.userService.getUserByUsername(user.getUsername());
         User email = this.userService.getUserByEmail(user.getEmail());
@@ -60,20 +59,16 @@ public class UsersController {
             return "user/register";
         }
 
-        if( userName != null ){
+        if (userName != null) {
             bindingResult.rejectValue("username", "error.user", "User name already exists");
             return "user/register";
         }
-        if( email != null ){
+        if (email != null) {
             bindingResult.rejectValue("email", "error.email", "Email already exists");
             return "user/register";
         }
-         if ( !bindingResult.hasErrors() ){
-            userService.addNewUser(user);
-             attributes.addFlashAttribute("successMessage", "User has been created");
 
-        }
-        return "user/login";
+        return "redirect:/";
     }
 
 }
