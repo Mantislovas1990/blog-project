@@ -13,6 +13,7 @@
 </head>
 <body>
 <section>
+<!--    <form method="POST" th:action="@{/posts/{postId}/comments/{id}/edit(postId = ${editComment.getPost().getId()}, id = ${editComment.id})}" th:object="${editComment}">-->
     <form method="POST" th:action="@{/posts/{postId}/comments/{id}/edit(postId = ${editComment.getPost().getId()}, id = ${editComment.id})}" th:object="${editComment}">
         <label>COMMENT BODY:</label>
         <textarea name="text" cols="60" rows="25" th:field="*{commentBody}"></textarea>

@@ -1,5 +1,6 @@
 package lt.codeacademy.blogproject.controllers;
 
+import lt.codeacademy.blogproject.dto.CommentDto;
 import lt.codeacademy.blogproject.entities.Comment;
 import lt.codeacademy.blogproject.entities.Post;
 import lt.codeacademy.blogproject.entities.User;
@@ -47,19 +48,18 @@ public class CommentController {
     @PreAuthorize("hasRole('ADMIN') or principal.id == #comment.user.id")
     @GetMapping("/posts/{postId}/comments/{id}/edit")
     public String editComment(@PathVariable("postId") Post post,
-                           @PathVariable("id") Comment comment,
-                           @PathVariable Long id, Model model) {
-        model.addAttribute("editComment", commentService.getCommentById(id));
+                              @PathVariable("id") Comment comment,
+                              Model model) {
+        model.addAttribute("editComment", comment);
         return "comments/edit";
     }
 
     @PreAuthorize("hasRole('ADMIN') or principal.id == #comment.user.id")
     @PostMapping("/posts/{postId}/comments/{id}/edit")
     public String editComment(@PathVariable("id") Comment comment,
-                           @PathVariable("postId") Post post,
-                           @AuthenticationPrincipal User user,
-                           Comment updatedComment){
-        commentService.updatedComment(post, user, updatedComment);
+                              @PathVariable("postId") Post post,
+                              @Valid CommentDto commentDto) {
+        commentService.updatedComment(comment, commentDto.getCommentBody());
         return "redirect:/posts/" + post.getId() + "/view";
     }
 

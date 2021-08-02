@@ -26,34 +26,34 @@ public class CommentService {
         this.postRepository = postRepository;
     }
 
-    public Comment saveComment(Comment  comment, Post post, User user) {
+    public Comment saveComment(Comment comment, Post post, User user) {
         comment.setUser(user);
         comment.setPost(post);
         return commentRepository.save(comment);
     }
 
 
-    public List<Comment> getCommentsByPostId(Long id){
-      return  commentRepository.getAllByPostId(id);
+    public List<Comment> getCommentsByPostId(Long id) {
+        return commentRepository.getAllByPostId(id);
     }
 
-    public Comment getCommentById(Long id){
+    public Comment getCommentById(Long id) {
         return commentRepository.getById(id);
     }
 
-    public void deleteComment(Comment comment){
+    public void deleteComment(Comment comment) {
         commentRepository.delete(comment);
     }
 
-    public Comment updatedComment(Post post, User user, Comment comment) {
+    public Comment updatedComment(Comment comment, String commentBody) {
         Comment comment1 = getCommentById(comment.getId());
 
         if (comment1 != null) {
             comment.setCreatedAt(comment1.getCreatedAt());
-            comment.setUser(user);
-            comment.setPost(post);
+            comment.setCommentBody(commentBody);
             return commentRepository.save(comment);
         }
         return null;
     }
+
 }

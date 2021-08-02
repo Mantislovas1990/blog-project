@@ -47,29 +47,33 @@ public class UsersController {
         return "redirect:/";
     }
 
+
     @PostMapping(value = "/register")
     public String registerNewUser(@Valid User user,
                                   BindingResult bindingResult,
                                   RedirectAttributes attributes) throws RoleNotFoundException {
 
-        User userName = this.userService.getUserByUsername(user.getUsername());
-        User email = this.userService.getUserByEmail(user.getEmail());
-
         if (bindingResult.hasErrors()) {
             return "user/register";
         }
+
+        User userName = this.userService.getUserByUsername(user.getUsername());
+        User email = this.userService.getUserByEmail(user.getEmail());
 
         if (userName != null) {
             bindingResult.rejectValue("username", "error.user", "User name already exists");
             return "user/register";
         }
+
         if (email != null) {
-            bindingResult.rejectValue("email", "error.email", "Email already exists");
+            bindingResult.rejectValue("email", "error.email", "Email already in use");
             return "user/register";
         }
+
         userService.addNewUser(user);
-        return "user/login";
+        attributes.addFlashAttribute("successMessage", "User has been created");
+        return "redirect:/users/login";
+
     }
+
 }
-
-
