@@ -8,6 +8,28 @@
     <header th:replace="fragments/layout :: header"></header>
 </div>
 <main>
+    <div class="d-flex justify-content-center ">
+        <div th:if="${commentEditSuccessMessage} != null">
+            <div th:text="#{comment.edit.success}" class="alert alert-success" role="alert">
+                Comment updated successfully
+            </div>
+        </div>
+        <div th:if="${commentEditErrorMessage} != null">
+            <div th:text="#{comment.edit.error}" class="alert alert-danger" role="alert">
+                Failed to update comment, please try again
+            </div>
+        </div>
+        <div th:if="${commentCreateSuccessMessage} != null">
+            <div th:text="#{comment.create.success}" class="alert alert-success" role="alert">
+                Comment created successfully
+            </div>
+        </div>
+        <div th:if="${commentCreateErrorMessage} != null">
+            <div th:text="#{comment.create.error}" class="alert alert-danger" role="alert">
+                Failed to create new comment, please try again
+            </div>
+        </div>
+    </div>
     <div class="album py-5 bg-light" th:object="${post}">
         <div class="container">
             <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3 d-flex justify-content-md-between">
@@ -72,7 +94,7 @@
                             <div class="d-flex justify-content-center">
                                 <div>
                                     <section sec:authorize="isAuthenticated()">
-                                        <form method="POST" th:action="@{/posts/{id}/comments/create(id= ${post.id})}"
+                                        <form  method="POST" th:action="@{/posts/{id}/comments/create(id= ${post.id})}"
                                               th:object="${createComment}">
                                             <h3 th:text="#{writeYourComment}">WRITE YOUR COMMENT</h3>
                                             <textarea name="text" id="body" cols="30" rows="5"

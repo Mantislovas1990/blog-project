@@ -12,10 +12,7 @@ import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpServletRequest;
@@ -59,10 +56,20 @@ public class PostController {
     @PreAuthorize("(hasRole('ADMIN') or principal.id == #user.id)")
     @PostMapping(value = "/posts/create")
     public String saveNewPost(@Valid Post post,
-                              @AuthenticationPrincipal User user) {
+                              @AuthenticationPrincipal User user,
+                              BindingResult bindingResult,
+                              RedirectAttributes attributes) {
+
+        if (bindingResult.hasErrors()) {
+            attributes.addFlashAttribute("postCreateErrorMessage", "Failed to create new post, please try again");
+            return "redirect:/index";
+        }
+
+        attributes.addFlashAttribute("postCreateSuccessMessage", "Post Created Successfully");
         postService.savePost(post);
-        return "redirect:/";
+        return "redirect:/index";
     }
+
 
     @GetMapping("/posts/{id}/view")
     public String getPost(@PathVariable("id") Long id, Model model) {
@@ -77,6 +84,7 @@ public class PostController {
     public String deletePost(
             @PathVariable("id") Post post
     ) {
+        postService.deletePost(post);
         return "redirect:/";
     }
 
@@ -91,9 +99,18 @@ public class PostController {
     @PreAuthorize("hasRole('ADMIN') or principal.id == #post.user.id")
     @PostMapping("posts/{id}/edit")
     public String editPost(@AuthenticationPrincipal User user,
-                           @PathVariable Post post,
-                           Post updatedPost) {
+                           @PathVariable("id") Post post,
+                           @Valid Post updatedPost,
+                           BindingResult bindingResult,
+                           RedirectAttributes attributes) {
+
+        if (bindingResult.hasErrors()) {
+            attributes.addFlashAttribute("postEditErrorMessage", "Failed to edit post, please try again");
+            return "redirect:/index";
+        }
+
+        attributes.addFlashAttribute("postEditSuccessMessage", "Post updated successfully");
         postService.updatedPost(updatedPost, user);
-        return "redirect:/";
+        return "redirect:/index";
     }
 }

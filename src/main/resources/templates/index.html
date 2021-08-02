@@ -12,6 +12,28 @@
 </div>
 
 <main style="background-color: #eee; height: 100%;">
+    <div class="d-flex justify-content-center ">
+        <div th:if="${postEditSuccessMessage} != null">
+            <div th:text="#{post.edit.success}" class="alert alert-success" role="alert">
+                Post updated successfully
+            </div>
+        </div>
+        <div th:if="${postEditErrorMessage} != null">
+            <div th:text="#{post.edit.error}" class="alert alert-danger" role="alert">
+                Failed to update post, please try again
+            </div>
+        </div>
+        <div th:if="${postCreateSuccessMessage} != null">
+            <div th:text="#{post.create.success}" class="alert alert-success" role="alert">
+                Post Created Successfully
+            </div>
+        </div>
+        <div th:if="${postCreateErrorMessage} != null">
+            <div th:text="#{post.create.error}" class="alert alert-danger" role="alert">
+                Failed to create new post, please try again
+            </div>
+        </div>
+    </div>
     <div class="album py-5 bg-light w-100 p-3">
         <div class="container">
             <div class="row row-cols-1 row-cols-sm-2 row-cols-md-2 g-2">
